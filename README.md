@@ -40,13 +40,15 @@
 
 `key` is always required. This is a unique token for each contact.
 
-A `track` is our mainstay. Events data is also passed on to the contact (which is created if necessary).
+A `track` is the main event. Event's data is also passed to the contact.
+
+If the contact doesn't exist, it will be created.
 
 ```
 _CT.push(["track", "added to {{ plan }} for {{ price }}", {
-	plan: "Awesome Plan",
-	price: "$9.99",
-  key: "dallas"
+  key: "dallas",
+  plan: "Awesome Plan",
+  price: "$9.99"
 }]);
 ```
 
@@ -56,24 +58,24 @@ The `key` element is always required and must be unique per contact. We'd recomm
 
 #### Save a Contact
 
-Save a contact with their data. New data will be merged with already saved data.
+Save a contact with their data. If a contact already exists, new data will be merged with old data.
 
 ```
 _CT.push(["saveContact", {
-	name: "Dallas Read",
-  location: "Halifax, NS",
-	key: "dallas"
+  key: "dallas",
+  name: "Dallas Read",
+  location: "Halifax, NS"
 }]);
 ```
 
 #### Overwrite A Contact's Data
 
-This will overwrite contact's existing data with the new data.
+This will overwrite contact's existing data with the new data. Contact will be created if it doesn't already exist.
 
 ```
 _CT.push(["overwriteContact", {
-	name: "Dallas Read",
-  location: "Halifax, NS",
-	key: "dallas"
+  key: "dallas",
+  name: "Dallas Read",
+  location: "Halifax, NS"
 }]);
 ```

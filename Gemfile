@@ -17,6 +17,7 @@ gem 'sidekiq'
 gem 'sidekiq-failures'
 gem 'sinatra', require: false
 gem 'slim'
+gem 'whenever'
 
 group :production do
   gem 'unicorn'

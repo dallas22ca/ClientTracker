@@ -18,6 +18,7 @@ class Contact < ActiveRecord::Base
     self.data ||= {}; d = {}; 
     self.data.map { |k, v| d[k.to_s.parameterize] = v }
     self.data = d
+    self.key = key.parameterize
   end
   
   def sync_segmentizations

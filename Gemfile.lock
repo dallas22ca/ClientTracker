@@ -40,6 +40,7 @@ GEM
       capistrano (< 3.0)
     celluloid (0.15.2)
       timers (~> 1.1.0)
+    chronic (0.10.2)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.1)
@@ -186,6 +187,9 @@ GEM
       raindrops (~> 0.7)
     warden (1.2.3)
       rack (>= 1.0)
+    whenever (0.8.4)
+      activesupport (>= 2.3.4)
+      chronic (>= 0.6.3)
     will_paginate (3.0.5)
 
 PLATFORMS
@@ -213,4 +217,5 @@ DEPENDENCIES
   slim
   uglifier (>= 1.3.0)
   unicorn
+  whenever
   will_paginate
