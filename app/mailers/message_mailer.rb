@@ -6,6 +6,7 @@ class MessageMailer < ActionMailer::Base
     message = Message.find(message_id)
     template = Liquid::Template.parse(message.body)
     @body = template.render(contact.data)
+    
     mail to: contact.data["email"], subject: message.subject
   end
 end

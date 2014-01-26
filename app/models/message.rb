@@ -4,15 +4,27 @@ class Message < ActiveRecord::Base
   has_many :sendable_contacts, through: :segments, source: :contacts
   
   after_commit :calculate_contacts_count
-  after_commit :deliver
+  after_commit :sidekiq_prepare_for_delivery, unless: :sent
+  
+  def sidekiq_prepare_for_delivery
+    BulkSender.perform_async "prepare_for_delivery", id
+  end
   
   def calculate_contacts_count
     self.update_columns contacts_count: sendable_contacts.count
   end
   
-  def deliver
-    for contact in sendable_contacts.where("contacts.data ? 'email'")
-      MessageMailer.bulk(contact.id, self.id).deliver
+  def prepare_for_delivery
+    unless sent?
+      mark_as_sent
+
+      for contact in sendable_contacts.where("contacts.data ? 'email'")
+        BulkSender.perform_async "deliver", id, contact.id
+      end
     end
+  end
+  
+  def mark_as_sent
+    update_attributes sent: true
   end
 end

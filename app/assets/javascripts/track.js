@@ -11,4 +11,5 @@
 // about supported directives.
 //
 //= require zepto
+//= require mustache
 //= require_tree ./track

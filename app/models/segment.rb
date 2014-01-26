@@ -7,7 +7,11 @@ class Segment < ActiveRecord::Base
   has_many :messageships
   has_many :messages, through: :messageships
   
-  after_save :sync_segmentizations
+  after_save :sidekiq_sync_segmentizations
+  
+  def sidekiq_sync_segmentizations
+    Segmentizer.perform_async id
+  end
   
   def sync_segmentizations
     new_segmentizations = []
@@ -43,6 +47,8 @@ class Segment < ActiveRecord::Base
     
       if matcher == "exists"
         query += "contacts.data ? '#{attribute}'#{join}"
+      elsif matcher == "does not exist"
+        query += "exist(contacts.data, '#{attribute}') is false#{join}"
       elsif matcher == "!="
         query += "(exist(contacts.data, '#{attribute}') is false or contacts.data -> '#{attribute}' #{matcher} '#{search}') #{join}"
       else

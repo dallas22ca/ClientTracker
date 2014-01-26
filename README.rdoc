@@ -1,15 +1,13 @@
 ## Todo
 
-- Sidekiq emailing and segment parsing
-- Import CSV
-
-
-## App Todo
-
-- Events
-  - Contact
-  - Description with option for {{ tags }}
-  - Data of tags
+- Choose a name
+- Push to Server
+- Script on Amazon
+- Add to Lively Plugin
+- Add to Lively Script
+- Add to CoScreen Plugin
+- Add to CoScreen Script
+- Search
   
 
 ## How to Use
@@ -23,6 +21,8 @@
 		name: "Dallas Read",
     location: "Halifax, NS",
 		key: "dallas"
+	}, function(data) {
+	  alert(data);
 	}]);
 	
   (function() {
@@ -61,5 +61,18 @@ _CT.push(["overwriteContact", {
 	name: "Dallas Read",
   location: "Halifax, NS",
 	key: "dallas"
+}]);
+```
+
+### Tracking
+
+Events data is also passed on to the contact.
+
+Events will create a contact if one is not found via the `key`.
+
+```
+_CT.push(["track", "dallas", "added to {{ plan }} for {{ price }}", {
+	plan: "Awesome Plan",
+	price: "$9.99"
 }]);
 ```

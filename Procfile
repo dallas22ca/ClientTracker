@@ -1,0 +1,1 @@
+nice: bundle exec sidekiq -q BulkSender,1 -q Segmentizer,1 -q ContactParser,1

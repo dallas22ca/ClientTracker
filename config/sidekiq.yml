@@ -1,0 +1,6 @@
+---
+:concurrency:  25
+:pidfile: tmp/pids/sidekiq.pid
+:queues:
+  - [BulkSender, 1]
+  - [Segmentizer, 1]

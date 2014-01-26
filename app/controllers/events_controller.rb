@@ -1,10 +1,15 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :set_contact
 
   # GET /events
   # GET /events.json
   def index
-    @events = @user.events
+    if @contact
+      @events = @contact.events.includes(:contact)
+    else
+      @events = @user.events.includes(:contact)
+    end
   end
 
   # GET /events/1
@@ -17,35 +22,20 @@ class EventsController < ApplicationController
     @event = Event.new
   end
 
-  # GET /events/1/edit
-  def edit
-  end
-
   # POST /events
   # POST /events.json
   def create
-    @event = Event.new(event_params)
+    @contact = @user.contacts.where(key: params[:contact_id]).first_or_create
+    @event = @contact.events.new(event_params)
+    @event.user = @user
 
     respond_to do |format|
       if @event.save
-        format.html { redirect_to @event, notice: 'Event was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @event }
+        @contact.update_attributes data: @contact.data.merge(@event.data)
+        format.html { redirect_to contact_event_url(@contact, @event), notice: 'Event was successfully created.' }
+        format.json { render action: 'show', status: :created, location: contact_event_url(@contact, @event) }
       else
         format.html { render action: 'new' }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /events/1
-  # PATCH/PUT /events/1.json
-  def update
-    respond_to do |format|
-      if @event.update(event_params)
-        format.html { redirect_to @event, notice: 'Event was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
     end
@@ -66,9 +56,15 @@ class EventsController < ApplicationController
     def set_event
       @event = @user.events.find(params[:id])
     end
+    
+    def set_contact
+      @contact = @user.contacts.where(key: params[:contact_id]).first if params[:contact_id]
+    end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:contact_id, :description, :data)
+      params.require(:event).permit(:description).tap do |whitelisted|
+        whitelisted[:data] = params[:event][:data]
+      end
     end
 end

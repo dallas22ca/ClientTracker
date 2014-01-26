@@ -7,7 +7,7 @@ ClientTracker.log = (data) ->
 	console.log data if ClientTracker.debug
 
 ClientTracker.responder = (response, callback) ->
-	callback(response) if callback
+	callback(response) if typeof callback == "function"
 	ClientTracker.log response
 
 ClientTracker.detectPushes = ->
@@ -30,16 +30,29 @@ ClientTracker.contacts = (path, data, callback = false) ->
 	, (response) ->
 		ClientTracker.responder response, callback
 
+ClientTracker.track = (key, description, data, callback = false) ->
+	Zepto.post "/contacts/#{key}/events.json",
+		event:
+			key: key
+			data: data
+			description: description
+	, (response) ->
+		ClientTracker.responder response, callback
+
 ClientTracker.parseEvents = ->
 	for event in _CT
 		event = _CT.shift()
 	
 		if event[0] == "saveContact"
 			ClientTracker.log "ClientTracker is attempting to save contact..."
-			ClientTracker.contacts "/save", event[1], event[2]
+			ClientTracker.contacts "/save", event[1], event[2], event[3]
 		else if event[0] == "overwriteContact"
 			ClientTracker.log "ClientTracker is attempting to replace contact..."
-			ClientTracker.contacts "/overwrite", event[1], event[2]
+			ClientTracker.contacts "/overwrite", event[1], event[2], event[3]
+		else if event[0] == "track"
+			desc = Mustache.render event[2], event[3]
+			ClientTracker.log "ClientTracker is tracking \"#{desc}\" for #{event[1]}..."
+			ClientTracker.track event[1], event[2], event[3], event[4]
 		else if event[0] == "api_key"
 			ClientTracker.api_key = event[1]
 			ClientTracker.log "ClientTracker API Key is set to #{ClientTracker.api_key}."

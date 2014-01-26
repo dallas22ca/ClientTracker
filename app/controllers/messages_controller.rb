@@ -4,7 +4,7 @@ class MessagesController < ApplicationController
   # GET /messages
   # GET /messages.json
   def index
-    @messages = Message.all
+    @messages = @user.messages
   end
 
   # GET /messages/1
@@ -19,12 +19,13 @@ class MessagesController < ApplicationController
 
   # GET /messages/1/edit
   def edit
+    redirect_to @message if @message.sent
   end
 
   # POST /messages
   # POST /messages.json
   def create
-    @message = Message.new(message_params)
+    @message = @user.messages.new(message_params)
 
     respond_to do |format|
       if @message.save
@@ -64,7 +65,7 @@ class MessagesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_message
-      @message = Message.find(params[:id])
+      @message = @user.messages.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

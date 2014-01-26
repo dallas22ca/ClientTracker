@@ -1,0 +1,28 @@
+<%= form_for(@user, url: import_processing_path) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@contact.errors.count, "error") %> prohibited this contact from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+	
+	<p>We simply grab your headers and apply each to the contact. Here are some hints:</p>
+	
+	<ul>
+		<li>Change "Email" and "Email Address" to be "email".</li>
+		<li>Your fields will be parameterized.</li>
+	</ul>
+	
+  <div class="field">
+    <%= f.file_field :file %>
+  </div>
+	
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -5,6 +5,7 @@ class Contact < ActiveRecord::Base
   
   has_many :segmentizations, dependent: :destroy
   has_many :segments, through: :segmentizations
+  has_many :events
   
   validates_presence_of :key
   validates_uniqueness_of :key, scope: :user_id
@@ -20,7 +21,7 @@ class Contact < ActiveRecord::Base
   end
   
   def sync_segmentizations
-    user.segments.map { |s| s.sync_segmentizations }
+    user.segments.map { |s| s.sidekiq_sync_segmentizations }
   end
   
   def to_param

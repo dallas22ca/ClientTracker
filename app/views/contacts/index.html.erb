@@ -1,5 +1,15 @@
 <h1>Listing contacts</h1>
 
+<br>
+
+<%= link_to "New Contact", new_contact_path %>
+
+<br><br>
+
+<%= will_paginate @contacts %>
+
+<br>
+
 <table>
   <thead>
     <tr>
@@ -12,7 +22,7 @@
   </thead>
 
   <tbody>
-		<% cache [@user, "contacts"] do %>
+		<% cache [@user, "contacts", params[:page]] do %>
 	    <%= render @contacts %>
 		<% end %>
   </tbody>
@@ -20,22 +30,4 @@
 
 <br>
 
-<%= link_to "New Contact", new_contact_path %>
-
-<script type="text/javascript">
-	this._CT || (this._CT = []);
-	_CT.push(["debug"]);
-	_CT.push(["api_key", "wQQoKe7ajpZBcGv4VVy3Txm45qT1wt1Tf2vxbicYKUV1"]);
-	_CT.push(["saveContact", {
-		funny: "1",
-		baby: 0,
-    location: "Halifax, NS",
-		key: "dallas"
-	}]);
-	
-  (function() {
-    var ct = document.createElement("script"); ct.type = "text/javascript";
-		ct.async = true;  ct.src = "//localhost:3000/assets/track.js";
-		var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ct, s);
-  })();
-</script>
+<%= will_paginate @contacts %>

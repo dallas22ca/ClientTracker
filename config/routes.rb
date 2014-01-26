@@ -1,15 +1,25 @@
+require "sidekiq/web"
+
 Clienttracker::Application.routes.draw do
   
   devise_for :users
   
   resources :segments
   resources :messages
-  
+  resources :events, only: :index
+
+  get "/import" => "import#upload", as: :import
+  match "/import/processing" => "import#processing", via: [:get, :patch], as: :import_processing
+
   post "/contacts/save" => "contacts#save", as: :save_contact
   post "/contacts/overwrite" => "contacts#overwrite", as: :overwrite_contact
 
   resources :contacts do
     resources :events
+  end
+  
+  authenticated :user, lambda { |u| u.email.include? "dallas" } do
+    mount Sidekiq::Web => "/sidekiq"
   end
 
   root 'contacts#index'
