@@ -1,0 +1,65 @@
+## Todo
+
+- Sidekiq emailing and segment parsing
+- Import CSV
+
+
+## App Todo
+
+- Events
+  - Contact
+  - Description with option for {{ tags }}
+  - Data of tags
+  
+
+## How to Use
+
+```
+<script type="text/javascript">
+	this._CT || (this._CT = []);
+	_CT.push(["debug"]);
+	_CT.push(["api_key", "XXXXXXXXXXXXXXXXXX"]);
+	_CT.push(["saveContact", {
+		name: "Dallas Read",
+    location: "Halifax, NS",
+		key: "dallas"
+	}]);
+	
+  (function() {
+    var ct = document.createElement("script"); ct.type = "text/javascript";
+		ct.async = true;  ct.src = "//localhost:3000/assets/track.js";
+		var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ct, s);
+  })();
+</script>
+```
+
+
+## Functions
+
+### Contacts
+
+The `key` element is always required and must be unique per contact. We'd recommend using your app's unique token or ID for that contact.
+
+#### Save a Contact
+
+Save a contact with their data. New data will be merged with already saved data.
+
+```
+_CT.push(["saveContact", {
+	name: "Dallas Read",
+  location: "Halifax, NS",
+	key: "dallas"
+}]);
+```
+
+#### Overwrite A Contact's Data
+
+This will overwrite contact's existing data with the new data.
+
+```
+_CT.push(["overwriteContact", {
+	name: "Dallas Read",
+  location: "Halifax, NS",
+	key: "dallas"
+}]);
+```

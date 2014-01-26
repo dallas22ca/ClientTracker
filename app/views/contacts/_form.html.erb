@@ -1,0 +1,31 @@
+<%= form_for(@contact) do |f| %>
+  <% if @contact.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@contact.errors.count, "error") %> prohibited this contact from being saved:</h2>
+
+      <ul>
+      <% @contact.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+	
+  <div class="field">
+    <%= f.label :key, "ID" %>
+    <%= f.text_field :key %>
+  </div>
+	
+	<div class="contact_data" data-contact-data="<%= @contact.data.to_json %>"></div>
+	<%= link_to "New Data", "#", class: "add_contact_data" %>
+	
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<div class="field template" data-template="contact-data">
+  <%= text_field_tag :label, "", name: "data_label[]" %>
+  <%= text_field_tag :content, "", name: "data_content[]" %>
+	<%= link_to "x", "#", class: "delete_field" %>
+</div>

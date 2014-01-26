@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @contact.user %>
+</p>
+
+<p>
+  <strong>Key:</strong>
+  <%= @contact.key %>
+</p>
+
+<p>
+  <strong>Data:</strong>
+  <%= @contact.data %>
+</p>
+
+<ul>
+	<% @contact.segments.each do |segment| %>
+		<li><%= link_to segment.name, segment %></li>
+	<% end %>
+</ul>
+
+<%= link_to 'Edit', edit_contact_path(@contact) %> |
+<%= link_to 'Back', contacts_path %>

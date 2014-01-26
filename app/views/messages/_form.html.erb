@@ -1,0 +1,43 @@
+<%= form_for(@message) do |f| %>
+  <% if @message.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@message.errors.count, "error") %> prohibited this message from being saved:</h2>
+
+      <ul>
+      <% @message.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+	
+  <div class="field">
+    <%= f.label :from %><br>
+    <%= f.text_field :from, disabled: true, value: @user.email %>
+  </div>
+
+  <div class="field">
+    <%= f.label :subject %><br>
+    <%= f.text_field :subject %>
+  </div>
+	
+  <div class="field">
+    <%= f.label :contacts_count %><br>
+    <%= f.text_field :contacts_count, disabled: true %>
+  </div>
+	
+	<div class="field">
+		<% @user.segments.each do |segment| %>
+	    <%= check_box_tag "message[segment_ids][]", segment.id, @message.segment_ids.include?(segment.id), id: dom_id(segment) %>&nbsp;
+	    <%= label_tag dom_id(segment), "#{segment.name} (#{segment.segmentizations_count} recipients)" %><br>
+		<% end %>
+	</div>
+	
+  <div class="field">
+    <%= f.label :body %><br>
+    <%= f.text_area :body %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

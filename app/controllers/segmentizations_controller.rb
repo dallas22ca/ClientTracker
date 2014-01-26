@@ -1,0 +1,2 @@
+class SegmentizationsController < ApplicationController
+end

@@ -1,0 +1,32 @@
+<%= form_for(@segment) do |f| %>
+  <% if @segment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@segment.errors.count, "error") %> prohibited this segment from being saved:</h2>
+
+      <ul>
+      <% @segment.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+	
+	<div class="segment_conditions" data-segment-conditions="<%= @segment.conditions.to_json %>"></div>
+	<%= link_to "New Condition", "#", class: "add_segment_condition" %>
+	
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<div class="field template" data-template="segment-condition">
+  <%= text_field_tag :field, "", name: "field[]" %>
+  <%= select_tag :matcher, options_for_select(["=", "ilike", "!="], ""), name: "matcher[]" %>
+  <%= text_field_tag :search, "", name: "search[]" %>
+	<%= link_to "x", "#", class: "delete_field" %>
+</div>
