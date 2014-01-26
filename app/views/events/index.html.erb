@@ -14,7 +14,7 @@
   <tbody>
     <% @events.each do |event| %>
       <tr>
-        <td><%= event.contact.key.capitalize %> was <%= event.full_description.downcase %></td>
+        <td><%= event.contact.key.capitalize %> <%= event.full_description %></td>
         <td><%= link_to 'Show', contact_event_path(event.contact, event) %></td>
         <td><%= link_to 'Edit', edit_contact_event_path(event.contact, event) %></td>
         <td><%= link_to 'Destroy', contact_event_path(event.contact, event), method: :delete, data: { confirm: 'Are you sure?' } %></td>

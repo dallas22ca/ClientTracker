@@ -36,6 +36,20 @@
 
 ## Functions
 
+### Tracking
+
+`key` is always required. This is a unique token for each contact.
+
+A `track` is our mainstay. Events data is also passed on to the contact (which is created if necessary).
+
+```
+_CT.push(["track", "added to {{ plan }} for {{ price }}", {
+	plan: "Awesome Plan",
+	price: "$9.99",
+  key: "dallas"
+}]);
+```
+
 ### Contacts
 
 The `key` element is always required and must be unique per contact. We'd recommend using your app's unique token or ID for that contact.
@@ -61,18 +75,5 @@ _CT.push(["overwriteContact", {
 	name: "Dallas Read",
   location: "Halifax, NS",
 	key: "dallas"
-}]);
-```
-
-### Tracking
-
-Events data is also passed on to the contact.
-
-Events will create a contact if one is not found via the `key`.
-
-```
-_CT.push(["track", "dallas", "added to {{ plan }} for {{ price }}", {
-	plan: "Awesome Plan",
-	price: "$9.99"
 }]);
 ```

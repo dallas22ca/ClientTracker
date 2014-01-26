@@ -4,7 +4,12 @@ class ContactsController < ApplicationController
   # GET /contacts
   # GET /contacts.json
   def index
-    @contacts = @user.contacts_in_segments(params[:segments]).includes(:segments).paginate(page: params[:page], per_page: 30)
+    if params[:segment_id]
+      @segment = @user.segments.find params[:segment_id]
+      @contacts = @segment.contacts.includes(:segments).paginate(page: params[:page], per_page: 30)
+    else
+      @contacts = @user.contacts_in_segments(params[:segments]).includes(:segments).paginate(page: params[:page], per_page: 30)
+    end
   end
 
   # GET /contacts/1

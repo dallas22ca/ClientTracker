@@ -3,8 +3,8 @@ upstream unicorn {
 }
 
 server {
-  listen 80 default deferred;
-  server_name *.netbuild.co;
+  listen 80;
+  server_name 107.170.24.138;
   root <%= current_path %>/public;
 
 	location ~ ^/assets/ {

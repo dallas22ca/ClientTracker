@@ -30,7 +30,10 @@ ClientTracker.contacts = (path, data, callback = false) ->
 	, (response) ->
 		ClientTracker.responder response, callback
 
-ClientTracker.track = (key, description, data, callback = false) ->
+ClientTracker.track = (description, data, callback = false) ->
+	key = data["key"]
+	delete data["key"]
+	
 	Zepto.post "/contacts/#{key}/events.json",
 		event:
 			key: key
@@ -50,9 +53,9 @@ ClientTracker.parseEvents = ->
 			ClientTracker.log "ClientTracker is attempting to replace contact..."
 			ClientTracker.contacts "/overwrite", event[1], event[2], event[3]
 		else if event[0] == "track"
-			desc = Mustache.render event[2], event[3]
+			desc = Mustache.render event[1], event[2]
 			ClientTracker.log "ClientTracker is tracking \"#{desc}\" for #{event[1]}..."
-			ClientTracker.track event[1], event[2], event[3], event[4]
+			ClientTracker.track event[1], event[2], event[3]
 		else if event[0] == "api_key"
 			ClientTracker.api_key = event[1]
 			ClientTracker.log "ClientTracker API Key is set to #{ClientTracker.api_key}."

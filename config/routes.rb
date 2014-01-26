@@ -4,7 +4,10 @@ Clienttracker::Application.routes.draw do
   
   devise_for :users
   
-  resources :segments
+  resources :segments do
+    resources :contacts, only: :index
+  end
+  
   resources :messages
   resources :events, only: :index
 
