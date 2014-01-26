@@ -4,3 +4,4 @@
 :queues:
   - [BulkSender, 1]
   - [Segmentizer, 1]
+  - [ContactParser, 1]
