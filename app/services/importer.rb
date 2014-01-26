@@ -18,8 +18,7 @@ class Importer
     (2..spreadsheet.last_row).each do |i|
       data = Hash[[headers, spreadsheet.row(i).map{ |c| c.to_s.strip }].transpose]
       key = data.delete("key")
-      key = data["email"] unless key
-      key = data["name"] unless key
+      key = SecureRandom.urlsafe_base64(36).gsub(/-|_/, "") unless key
       data["email"] = data.delete("email-address") unless data["email"]
       
       contact = Contact.create(
