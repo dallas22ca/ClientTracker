@@ -18,7 +18,7 @@ namespace :postgresql do
     run %Q{#{sudo} -u postgres psql -c "create user #{postgresql_user} with superuser password '#{postgresql_password}';"}
     run %Q{#{sudo} -u postgres psql -c "create database #{postgresql_database} owner #{postgresql_user};"}
     run %Q{#{sudo} -u postgres psql -c "ALTER USER #{postgresql_user} WITH SUPERUSER;"}
-    run %Q{#{sudo} -u postgres psql -c "create extension if not exists hstore; "}
+    # run %Q{#{sudo} -u postgres psql -c "create extension if not exists hstore; "}
   end
   after "deploy:setup", "postgresql:create_database"
   
