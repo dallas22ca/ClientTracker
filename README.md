@@ -56,7 +56,7 @@ _CT.push(["track", "added to {{ plan }} for {{ price }}", {
 
 The `key` element is always required and must be unique per contact. We'd recommend using your app's unique token or ID for that contact.
 
-#### Save a Contact
+#### Updating a Contact
 
 Save a contact with their data. If a contact already exists, new data will be merged with old data.
 
@@ -68,7 +68,7 @@ _CT.push(["saveContact", {
 }]);
 ```
 
-#### Overwrite A Contact's Data
+#### Overwriting A Contact's Data
 
 This will overwrite contact's existing data with the new data. Contact will be created if it doesn't already exist.
 

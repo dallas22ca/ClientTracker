@@ -22,7 +22,7 @@ class Contact < ActiveRecord::Base
   end
   
   def sync_segmentizations
-    user.segments.map { |s| s.sidekiq_sync_segmentizations }
+    user.segments.map { |s| s.sidekiq_sync_segmentizations } if user
   end
   
   def to_param
