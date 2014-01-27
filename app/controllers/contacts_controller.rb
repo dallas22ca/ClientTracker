@@ -6,9 +6,9 @@ class ContactsController < ApplicationController
   def index
     if params[:segment_id]
       @segment = @user.segments.find params[:segment_id]
-      @contacts = @segment.contacts.includes(:segments).paginate(page: params[:page], per_page: 30)
+      @contacts = @segment.contacts.paginate(page: params[:page], per_page: 30)
     else
-      @contacts = @user.contacts_in_segments(params[:segments]).includes(:segments).paginate(page: params[:page], per_page: 30)
+      @contacts = @user.contacts_in_segments(params[:segments]).paginate(page: params[:page], per_page: 30)
     end
   end
 

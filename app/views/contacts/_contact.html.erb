@@ -2,7 +2,6 @@
 	<tr>
 	  <td><%= contact.key %></td>
 	  <td><%= contact.data %></td>
-		<td><%= contact.segments.map { |s| link_to s.name, s }.join(", ").html_safe %></td>
 	  <td><%= link_to 'Show', contact %></td>
 	  <td><%= link_to 'Edit', edit_contact_path(contact) %></td>
 	  <td><%= link_to 'Destroy', contact, method: :delete, data: { confirm: 'Are you sure?' } %></td>
