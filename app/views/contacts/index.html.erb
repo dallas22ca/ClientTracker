@@ -22,7 +22,7 @@
   </thead>
 
   <tbody>
-		<% cache [@user, "contacts", params[:page].to_i] do %>
+		<% cache [@user ? @user : @segment, "contacts", params[:page].to_i] do %>
 	    <%= render @contacts %>
 		<% end %>
   </tbody>

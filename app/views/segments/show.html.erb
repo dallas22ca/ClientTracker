@@ -10,33 +10,5 @@
   <%= @segment.conditions %>
 </p>
 
-<br><br>
-
-<%= will_paginate @contacts %>
-
-<br>
-
-<table>
-  <thead>
-    <tr>
-      <th>Key</th>
-      <th>Data</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-		<% cache [@segment, "contacts", params[:page].to_i] do %>
-			<%= render @contacts %>
-		<% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= will_paginate @contacts %>
-
 <%= link_to 'Edit', edit_segment_path(@segment) %> |
 <%= link_to 'Back', segments_path %>
