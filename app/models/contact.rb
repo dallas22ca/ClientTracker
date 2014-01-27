@@ -1,7 +1,7 @@
 class Contact < ActiveRecord::Base
   store_accessor :data
   
-  belongs_to :user
+  belongs_to :user, touch: true
   
   has_many :segmentizations, dependent: :destroy
   has_many :segments, through: :segmentizations

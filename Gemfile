@@ -18,6 +18,7 @@ gem 'sidekiq-failures'
 gem 'sinatra', require: false
 gem 'slim'
 gem 'whenever'
+gem 'newrelic_rpm'
 
 group :production do
   gem 'unicorn'
