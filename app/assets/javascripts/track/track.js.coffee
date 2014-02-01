@@ -1,6 +1,6 @@
 @Remetric ||= {}
 
-Remetric.domain = if typeof _RM.domain != "undefined" then _RM.domain else (if window.location.href.indexOf("localhost") != -1 || window.location.href.indexOf("file:") != -1 then "http://localhost:3000" else "https://secure.remetric.com")
+Remetric.domain = "https://secure.remetric.com"
 Remetric.api_key = false
 Remetric.debug = false
 
@@ -41,7 +41,10 @@ Remetric.parseEvents = ->
 	for event in _RM
 		event = _RM.shift()
 	
-		if event[0] == "saveContact"
+		if event[0] == "domain"
+			Remetric.domain = event[1]
+			Remetric.log "Remetric domain is set to #{Remetric.domain}."
+		else if event[0] == "saveContact"
 			Remetric.log "Remetric is attempting to save contact..."
 			Remetric.contacts "/save", event[1], event[2], event[3]
 		else if event[0] == "overwriteContact"
