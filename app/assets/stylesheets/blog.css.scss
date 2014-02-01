@@ -1,0 +1,64 @@
+#content {
+	.header {
+	  padding-top: 185px;
+	  padding-bottom: 20px;
+	  background: url(/assets/imgs/forest.jpg);
+		
+	  h2 {
+	    font-size: 38px;
+	    line-height: 44px;
+	    font-weight: 600;
+	    margin-bottom: 20px;
+	    color: #fff;
+	    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+	  }
+		
+	  .byline {
+	    font-size: 18px;
+	    line-height: 26px;
+	    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+	    color: #aaa;
+	  }
+	
+		.suggested li {
+		  border-bottom: 1px solid #ddd;
+			
+		  &:last-child {
+		    border-bottom: 0 none;
+		  }
+			
+		  a {
+		    display: block;
+		    padding: 5px 0px;
+		  }
+		}
+	}
+}
+
+.post {
+  font-family: Georgia, Times, Serif;
+  font-size: 18px;
+  line-height: 26px;
+  margin-top: 30px;
+	
+  a {
+    color: #8F000C;
+  }
+	
+  h3 {
+    font-family: "Dosis", Arial, Sans Serif;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 46px;
+    padding-top: 15px;
+  }
+	
+  blockquote {
+    padding: 15px;
+    background: #eee;
+  }
+	
+  h3, h4, blockquote, ul, ol, p {
+    margin-bottom: 15px;
+  }
+}

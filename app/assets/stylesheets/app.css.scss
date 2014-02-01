@@ -1,0 +1,44 @@
+@font-face {
+  font-family: "Dosis";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Dosis Regular"), local("Dosis-Regular"), url(/fonts/dosis.woff) format("woff");
+}
+
+
+@font-face {
+  font-family: "Dosis";
+  font-style: normal;
+  font-weight: 600;
+  src: local("Dosis SemiBold"), local("Dosis-SemiBold"), url(/fonts/dosis-semibold.woff) format("woff");
+}
+
+
+body {
+  font-family: "Dosis", Arial, Sans Serif;
+  font-size: 15px;
+}
+
+.clear {
+  clear: both;
+}
+
+.narrow_container {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  max-width: 640px;
+  padding: 10px;
+}
+
+.wide_container {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  max-width: 980px;
+  padding: 10px;
+}
+
+.template {
+  display: none;
+}
