@@ -10,7 +10,7 @@ class SegmentsController < ApplicationController
   # GET /segments/1
   # GET /segments/1.json
   def show
-    @contacts = @segment.contacts.includes(:segments).paginate(page: params[:page], per_page: 30)
+    @contacts = @segment.contacts.includes(:segments).paginate(page: params[:page], per_page: 20)
   end
 
   # GET /segments/new

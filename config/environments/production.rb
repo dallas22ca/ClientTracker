@@ -71,6 +71,9 @@ Remetric::Application.configure do
 
   # Send deprecation notices to registered listeners.
   config.active_support.deprecation = :notify
+  
+  default_url_options[:host] = "secure.remetric.com"
+  default_url_options[:protocol] = "https"
 
   # Disable automatic flushing of the log to improve performance.
   # config.autoflush_log = false

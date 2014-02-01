@@ -46,7 +46,11 @@ class User < ActiveRecord::Base
     end
   end
   
+  def allowed_to_email?
+    email == "dallas@livehours.co" || email == "ghostlitinfo@gmail.com"
+  end
+  
   def admin?
-    email == "dallas@livehours.co" || email == "dallasgood@gmail.com"
+    email == "dallas@livehours.co"
   end
 end

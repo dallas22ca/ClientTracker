@@ -1,4 +1,6 @@
 class Message < ActiveRecord::Base
+  belongs_to :user
+  
   has_many :messageships
   has_many :segments, through: :messageships
   has_many :sendable_contacts, through: :segments, source: :contacts
