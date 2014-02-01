@@ -1,6 +1,6 @@
 require "sidekiq/web"
 
-Clienttracker::Application.routes.draw do
+Remetric::Application.routes.draw do
   
   devise_for :users
   

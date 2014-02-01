@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Clienttracker::Application.load_tasks
+Remetric::Application.load_tasks
