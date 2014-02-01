@@ -46,6 +46,14 @@ a {
 		color: inherit;
 }
 
+b, strong {
+	font-weight: 600;
+}
+
+i, em {
+	font-style: oblique;
+}
+
 *, *:before, *:after {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;

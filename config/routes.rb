@@ -15,7 +15,7 @@ Remetric::Application.routes.draw do
   end
   
   resources :contacts do
-    resources :events
+    resources :events, only: [:index]
   end
   
   resources :messages
