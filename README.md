@@ -14,10 +14,10 @@
 
 ```
 <script type="text/javascript">
-	this._CT || (this._CT = []);
-	_CT.push(["debug"]);
-	_CT.push(["api_key", "XXXXXXXXXXXXXXXXXX"]);
-  _CT.push(["track", "added to {{ plan }} for {{ price }}", {
+	this._RM || (this._RM = []);
+	_RM.push(["debug"]);
+	_RM.push(["api_key", "XXXXXXXXXXXXXXXXXX"]);
+  _RM.push(["track", "added to {{ plan }} for {{ price }}", {
     key: "dallas",
     plan: "Awesome Plan",
     price: "$9.99"
@@ -45,7 +45,7 @@ A `track` is the main event. Event's data is also passed to the contact.
 If the contact doesn't exist, it will be created.
 
 ```
-_CT.push(["track", "added to {{ plan }} for {{ price }}", {
+_RM.push(["track", "added to {{ plan }} for {{ price }}", {
   key: "dallas",
   plan: "Awesome Plan",
   price: "$9.99"
@@ -61,7 +61,7 @@ The `key` element is always required and must be unique per contact. We'd recomm
 Save a contact with their data. If a contact already exists, new data will be merged with old data.
 
 ```
-_CT.push(["saveContact", {
+_RM.push(["saveContact", {
   key: "dallas",
   name: "Dallas Read",
   location: "Halifax, NS"
@@ -73,7 +73,7 @@ _CT.push(["saveContact", {
 This will overwrite contact's existing data with the new data. Contact will be created if it doesn't already exist.
 
 ```
-_CT.push(["overwriteContact", {
+_RM.push(["overwriteContact", {
   key: "dallas",
   name: "Dallas Read",
   location: "Halifax, NS"

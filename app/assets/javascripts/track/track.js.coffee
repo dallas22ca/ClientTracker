@@ -11,9 +11,9 @@ remetric.responder = (response, callback) ->
 	remetric.log response
 
 remetric.detectPushes = ->
-	@_CT ||= []
+	@_RM ||= []
 
-	_CT.push = (args) ->
+	_RM.push = (args) ->
 		a = Array.prototype.push.call this, args
 		remetric.log "remetric has received a(n) #{args[0]} event."
 		setTimeout remetric.parseEvents, 20
@@ -37,8 +37,8 @@ remetric.track = (description, data, callback = false) ->
 		remetric.responder response, callback
 
 remetric.parseEvents = ->
-	for event in _CT
-		event = _CT.shift()
+	for event in _RM
+		event = _RM.shift()
 	
 		if event[0] == "saveContact"
 			remetric.log "remetric is attempting to save contact..."
