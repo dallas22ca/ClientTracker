@@ -22,6 +22,7 @@ Remetric.detectPushes = ->
 
 Remetric.contacts = (path, data, callback = false) ->
 	Zepto.post "#{Remetric.domain}/contacts#{path}.json",
+		dataType: "jsonp"
 		api_key: Remetric.api_key
 		contact:
 			data: data
@@ -30,6 +31,7 @@ Remetric.contacts = (path, data, callback = false) ->
 
 Remetric.track = (description, data, callback = false) ->
 	Zepto.post "#{Remetric.domain}/events.json",
+		dataType: "jsonp"
 		api_key: Remetric.api_key
 		event:
 			data: data
