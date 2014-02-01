@@ -29,12 +29,7 @@ class ContactsController < ApplicationController
   # POST /contacts
   # POST /contacts.json
   def create
-    if params[:contact][:data]
-      @contact = @user.contacts.new(key: params[:contact][:key])
-      @contact.data = params[:contact][:data]
-    else
-      @contact = @user.contacts.new(contact_params)
-    end
+    @contact = @user.contacts.new(contact_params)
 
     respond_to do |format|
       if @contact.save
@@ -62,7 +57,8 @@ class ContactsController < ApplicationController
   end
   
   def save
-    @contact = @user.contacts.where(key: params[:contact][:key]).first_or_initialize
+    key = params[:contact][:data].delete :key
+    @contact = @user.contacts.where(key: key).first_or_initialize
     @contact.update_attributes data: @contact.data.merge(params[:contact][:data])
     
     respond_to do |format|
@@ -72,7 +68,8 @@ class ContactsController < ApplicationController
   end
   
   def overwrite
-    @contact = @user.contacts.where(key: params[:contact][:key]).first_or_initialize
+    key = params[:contact][:data].delete :key
+    @contact = @user.contacts.where(key: key).first_or_initialize
     @contact.data = params[:contact][:data]
     @contact.save
     

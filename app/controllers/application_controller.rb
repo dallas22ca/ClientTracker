@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   end
   
   def authenticate_user_from_api_key!
-    if /(contacts\#(create|update))/ =~ "#{controller_name}##{action_name}"
+    if /(contacts\#(save|overwrite)|events\#create)/ =~ "#{controller_name}##{action_name}"
       user = User.where(api_key: params[:api_key]).first
       sign_in user, store: false if user
     else

@@ -1,4 +1,4 @@
-class ClientTracker
+class remetric
   require "rest-client"
 
   def initialize api_key, sandbox = false

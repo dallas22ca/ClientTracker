@@ -25,13 +25,13 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    @contact = @user.contacts.where(key: params[:contact_id]).first_or_create
+    key = params[:event][:data].delete :key
+    @contact = @user.contacts.where(key: key).first_or_create
     @event = @contact.events.new(event_params)
     @event.user = @user
 
     respond_to do |format|
       if @event.save
-        @contact.update_attributes data: @contact.data.merge(@event.data)
         format.html { redirect_to contact_event_url(@contact, @event), notice: 'Event was successfully created.' }
         format.json { render action: 'show', status: :created, location: contact_event_url(@contact, @event) }
       else

@@ -19,7 +19,7 @@ Clienttracker::Application.routes.draw do
   end
   
   resources :messages
-  resources :events, only: :index
+  resources :events, only: [:index, :create]
   
   authenticated :user, lambda { |u| u.email.include? "dallas" } do
     mount Sidekiq::Web => "/sidekiq"

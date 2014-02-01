@@ -17,11 +17,11 @@
 	this._CT || (this._CT = []);
 	_CT.push(["debug"]);
 	_CT.push(["api_key", "XXXXXXXXXXXXXXXXXX"]);
-	_CT.push(["saveContact", {
-		name: "Dallas Read",
-    location: "Halifax, NS",
-		key: "dallas"
-	}, function(data) {
+  _CT.push(["track", "added to {{ plan }} for {{ price }}", {
+    key: "dallas",
+    plan: "Awesome Plan",
+    price: "$9.99"
+  }, function(data) {
 	  alert(data);
 	}]);
 	

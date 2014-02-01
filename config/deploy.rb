@@ -13,7 +13,7 @@ set :use_sudo, false
 set :workers, { '*' => 3 }
 
 set :scm, "git"
-set :repository, "git@github.com:dallas22ca/ClientTracker.git"
+set :repository, "git@github.com:dallas22ca/remetric.git"
 
 set :maintenance_template_path, File.expand_path("../recipes/templates/maintenance.html.erb", __FILE__)
 set :whenever_command, "bundle exec whenever"
