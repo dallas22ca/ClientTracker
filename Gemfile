@@ -19,7 +19,6 @@ gem 'sinatra', require: false
 gem 'slim'
 gem 'whenever'
 gem 'newrelic_rpm'
-gem 'rack-cors', :require => 'rack/cors'
 gem 'dalli'
 
 group :production do

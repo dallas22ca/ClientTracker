@@ -16,27 +16,29 @@
 
 <br><br>
 
-<%= will_paginate @contacts %>
+<% cache [@segment ? @segment : @user, "contacts", params[:page].to_i] do %>
 
-<br>
+	<%= will_paginate @contacts %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Key</th>
-      <th>Data</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+	<br>
 
-  <tbody>
-		<% cache [@segment ? @segment : @user, "contacts", params[:page].to_i] do %>
+	<table>
+	  <thead>
+	    <tr>
+	      <th>Key</th>
+	      <th>Data</th>
+	      <th></th>
+	      <th></th>
+	    </tr>
+	  </thead>
+
+	  <tbody>
 	    <%= render @contacts %>
-		<% end %>
-  </tbody>
-</table>
+	  </tbody>
+	</table>
+	
+	<br>
 
-<br>
+	<%= will_paginate @contacts %>
 
-<%= will_paginate @contacts %>
+<% end %>
