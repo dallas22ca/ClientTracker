@@ -1,6 +1,6 @@
 @Remetric ||= {}
 
-Remetric.domain = if window.location.href.indexOf("localhost") != -1 || window.location.href.indexOf("file:") != -1 then "http://localhost:3000" else "https://secure.remetric.com"
+Remetric.domain = if typeof _RM.domain != "undefined" then _RM.domain else (if window.location.href.indexOf("localhost") != -1 || window.location.href.indexOf("file:") != -1 then "http://localhost:3000" else "https://secure.remetric.com")
 Remetric.api_key = false
 Remetric.debug = false
 
