@@ -21,27 +21,21 @@ Remetric.detectPushes = ->
 		a
 
 Remetric.contacts = (path, data, callback = false) ->
-	Zepto.ajax "#{Remetric.domain}/contacts#{path}.json",
-		type: "POST"
-		dataType: "jsonp"
-		data:
-			api_key: Remetric.api_key
-			contact:
-				data: data
-		complete: (response) ->
-			Remetric.responder response, callback
+	Zepto.post "#{Remetric.domain}/contacts#{path}.json",
+		api_key: Remetric.api_key
+		contact:
+			data: data
+	, (response) ->
+		Remetric.responder response, callback
 
 Remetric.track = (description, data, callback = false) ->
-	Zepto.ajax "#{Remetric.domain}/events.json",
-		type: "POST"
-		dataType: "jsonp"
-		data:
-			api_key: Remetric.api_key
-			event:
-				data: data
-				description: description
-		complete: (response) ->
-			Remetric.responder response, callback
+	Zepto.post "#{Remetric.domain}/events.json",
+		api_key: Remetric.api_key
+		event:
+			data: data
+			description: description
+	, (response) ->
+		Remetric.responder response, callback
 
 Remetric.parseEvents = ->
 	for event in _RM

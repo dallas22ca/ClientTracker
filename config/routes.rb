@@ -11,11 +11,11 @@ Remetric::Application.routes.draw do
   post "/contacts/overwrite" => "contacts#overwrite", as: :overwrite_contact
   
   resources :segments do
-    resources :contacts, only: :index
+    resources :contacts, only: [:index]
   end
   
   resources :contacts do
-    resources :events, only: [:index]
+    resources :events, only: [:index, :show]
   end
   
   resources :messages
