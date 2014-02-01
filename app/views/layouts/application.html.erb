@@ -1,31 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Remetric</title>
+  <title>Retrack | Remetric</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <link rel="apple-touch-icon" sizes="120x120" href="/imgs/touch-icon-iphone-retina.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/imgs/touch-icon-ipad-retina.png">
+  <link rel="shortcut icon" href="/imgs/favicon.ico" />
   <%= csrf_meta_tags %>
 </head>
 <body>
 	
-<ul>
-	<li><%= link_to "Import Contacts", import_path %></li>
-	<li><%= link_to "New Contact", new_contact_path %></li>
-	<li><%= link_to "Events", events_path %></li>
-	<li><%= link_to "New Message", new_message_path %></li>
-	<li><%= link_to "Messages", messages_path %></li>
-	<li><%= link_to "Segments", segments_path %></li>
-	<li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
-</ul>
+	<%= render "nav", placeholder: false %>
+	<%= render "nav", placeholder: true %>
 
-<ul>
-	<li><%= link_to "All Contacts", root_path %></li>
-	<% @user.segments.each do |segment| %>
-		<li><%= link_to "Show #{segment.name} Contacts", segment_contacts_path(segment) %></li>
-	<% end %>
-</ul>
-
-<%= yield %>
+	<div id="yield" class="wide_container">
+		<%= request.path == import_path %>
+		<%= yield %>
+	</div>
+	
+  <div id="footer" class="app_footer">
+    <div class="wide_container">
+      
+      <div id="after_footer">
+        <p class="copyright">Copyright &copy; <%= Time.now.year %> <a href="/blog/">Remetric.com</a>. All Rights Reserved.</p>
+        
+        <ul class="terms_nav">
+          <li><%= link_to "Terms of Service", "http://www.remetric.com/blog/" %></li>
+          <li><%= link_to "Privacy Policy", "http://www.remetric.com/blog/" %></li>
+          <li><%= link_to "Security", "http://www.remetric.com/blog/" %></li>
+        </ul>
+      </div>
+      
+      <div class="clear"></div>
+    </div>
+  </div>
 
 </body>
 </html>

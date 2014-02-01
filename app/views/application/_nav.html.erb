@@ -1,0 +1,25 @@
+<div class="topbar<%= " topbar_placeholder" if placeholder %>">
+  <div class="wide_container">
+		<%= link_to image_tag("/imgs/logo.png"), root_path, id: "logo" %>
+  
+    <ul class="left_nav nav">
+			<li><%= link_to "Contacts", contacts_path, class: "#{"selected" if request.path == contacts_path}" %></li>
+			<li><%= link_to "Events", events_path, class: "#{"selected" if request.path == events_path}" %></li>
+			
+			<% if current_user.admin? %>
+				<!--
+				<li><%= link_to "New Message", new_message_path, class: "#{"selected" if request.path == new_message_path}" %></li>
+								<li><%= link_to "Messages", messages_path, class: "#{"selected" if request.path == messages_path}" %></li>-->
+				
+			<% end %>
+			
+			<li><%= link_to "Segments", segments_path, class: "#{"selected" if request.path == segments_path}" %></li>
+    </ul>
+  
+    <ul class="right_nav nav">
+			<li><%= link_to "My Account", edit_user_registration_path, class: "#{"selected" if request.path == edit_user_registration_path}" %></li>
+    </ul>
+  
+    <div class="clear"></div>
+  </div>
+</div>

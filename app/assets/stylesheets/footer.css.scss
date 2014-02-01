@@ -4,6 +4,12 @@
   width: 100%;
   padding: 20px 0px 20px;
   color: #ccc;
+	
+	&.app_footer {
+		#after_footer {
+			padding-top: 0px;
+		}
+	}
   
 	h3 {
     color: #eee;
@@ -23,21 +29,21 @@
   a:hover {
     color: #fff;
   }
-}
-
-#after_footer {
-  padding-top: 50px;
-  clear: both;
-  font-size: 14px;
-  color: #aaa;
-  
-	.copyright {
-    float: left;
-  }
 	
-  .terms_nav li {
-    float: right;
-    display: inline-block;
-    margin: 0 20px 0 0;
-  }
+	#after_footer {
+	  padding-top: 50px;
+	  clear: both;
+	  font-size: 14px;
+	  color: #aaa;
+  
+		.copyright {
+	    float: left;
+	  }
+	
+	  .terms_nav li {
+	    float: right;
+	    display: inline-block;
+	    margin: 0 20px 0 0;
+	  }
+	}
 }

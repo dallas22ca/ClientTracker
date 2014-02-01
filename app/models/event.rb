@@ -5,6 +5,10 @@ class Event < ActiveRecord::Base
   
   after_save :update_contact
   
+  validates_presence_of :contact
+  validates_presence_of :user
+  validates_presence_of :description
+  
   def update_contact
     contact.update_attributes data: contact.data.merge(data)
   end

@@ -21,7 +21,7 @@ Remetric::Application.routes.draw do
   resources :messages
   resources :events, only: [:index, :create]
   
-  authenticated :user, lambda { |u| u.email.include? "dallas" } do
+  authenticated :user, lambda { |u| u.admin? } do
     mount Sidekiq::Web => "/sidekiq"
   end
 

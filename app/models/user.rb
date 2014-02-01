@@ -45,4 +45,8 @@ class User < ActiveRecord::Base
       contacts
     end
   end
+  
+  def admin?
+    email == "dallas@livehours.co" || email == "dallasgood@gmail.com"
+  end
 end
