@@ -26,9 +26,9 @@
 	}]);
 	
   (function() {
-    var ct = document.createElement("script"); ct.type = "text/javascript";
-		ct.async = true;  ct.src = "//localhost:3000/assets/track.js";
-		var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ct, s);
+    var rm = document.createElement("script"); rm.type = "text/javascript";
+		rm.async = true;  rm.src = "https://secure.remetric.com/track.js";
+		var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(rm, s);
   })();
 </script>
 ```
