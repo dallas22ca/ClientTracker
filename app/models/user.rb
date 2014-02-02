@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
   after_commit :sidekiq_parse_contacts, if: Proc.new { file.exists? }
   
   def sidekiq_parse_contacts
-    ContactParser.perform_async id
+    ContactParser.perform_in 1.minute, id
   end
   
   def parse_contacts
