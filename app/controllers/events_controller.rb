@@ -6,9 +6,9 @@ class EventsController < ApplicationController
   # GET /events.json
   def index
     if @contact
-      @events = @contact.events.includes(:contact)
+      @events = @contact.events.includes(:contact).paginate(page: params[:page], per_page: 20)
     else
-      @events = @user.events.includes(:contact)
+      @events = @user.events.includes(:contact).paginate(page: params[:page], per_page: 20)
     end
   end
 

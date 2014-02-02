@@ -1,9 +1,15 @@
-<table>
-  <tbody>
-    <% @events.each do |event| %>
-      <tr>
-        <td><%= event.full_description_with_links.html_safe %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% cache [@contact ? @contact : @user, "events", params[:page].to_i] do %>
+
+	<%= will_paginate @events %>
+
+	<br>
+
+	<ul>
+		<%= render @events %>
+	</ul>
+
+	<br>
+
+	<%= will_paginate @events %>
+
+<% end %>

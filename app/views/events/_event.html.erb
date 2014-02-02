@@ -1,0 +1,5 @@
+<% cache event do %>
+	<%= content_tag_for :li, event do %>
+		<%= event.full_description_with_links.html_safe %> - <%= event.created_at.strftime("%b %d, %Y") %>
+	<% end %>
+<% end %>
