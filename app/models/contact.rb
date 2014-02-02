@@ -5,7 +5,7 @@ class Contact < ActiveRecord::Base
   
   has_many :segmentizations, dependent: :destroy
   has_many :segments, through: :segmentizations
-  has_many :events
+  has_many :events, dependent: :destroy
   
   validates_presence_of :key
   validates_uniqueness_of :key, scope: :user_id
