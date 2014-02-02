@@ -2,7 +2,7 @@
   <tbody>
     <% @events.each do |event| %>
       <tr>
-        <td><%= event.full_description_with_links %></td>
+        <td><%= event.full_description_with_links.html_safe %></td>
       </tr>
     <% end %>
   </tbody>
