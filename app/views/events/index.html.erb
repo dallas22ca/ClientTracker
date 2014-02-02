@@ -2,7 +2,7 @@
   <tbody>
     <% @events.each do |event| %>
       <tr>
-        <td><%= event.contact.key.capitalize %> <%= event.full_description %></td>
+        <td><%= event.full_description_with_links %></td>
       </tr>
     <% end %>
   </tbody>

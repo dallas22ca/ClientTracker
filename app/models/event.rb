@@ -16,4 +16,10 @@ class Event < ActiveRecord::Base
   def full_description
     Liquid::Template.parse(description).render(data)
   end
+  
+  def full_description_with_links
+    linked_data = {}
+    data.map { |k,v| linked_data[k] = ActionController::Base.helpers.link_to(v, Rails.application.routes.url_helpers.contact_event_path(contact, self)) }
+    Liquid::Template.parse(description).render(linked_data)
+  end
 end
