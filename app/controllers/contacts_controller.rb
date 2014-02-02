@@ -58,7 +58,7 @@ class ContactsController < ApplicationController
   
   def save
     key = params[:contact][:data].delete :key
-    @contact = @user.contacts.where(key: key).first_or_initialize
+    @contact = Contact.where(key: key, user_id: @user.id).first_or_initialize
     @contact.update_attributes data: @contact.data.merge(params[:contact][:data])
     
     respond_to do |format|
@@ -69,7 +69,7 @@ class ContactsController < ApplicationController
   
   def overwrite
     key = params[:contact][:data].delete :key
-    @contact = @user.contacts.where(key: key).first_or_initialize
+    @contact = Contact.where(key: key, user_id: @user.id).first_or_initialize
     @contact.data = params[:contact][:data]
     @contact.save
     
