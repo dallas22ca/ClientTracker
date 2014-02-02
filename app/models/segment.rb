@@ -52,7 +52,7 @@ class Segment < ActiveRecord::Base
       elsif matcher == "!="
         query += "(exist(contacts.data, '#{attribute}') is false or contacts.data -> '#{attribute}' #{matcher} '#{search}') #{join}"
       elsif [">", ">=", "<", "<="].include? matcher
-        query += "(contacts.data -> '#{attribute}')::integer #{matcher} '#{search}'#{join}"
+        query += "(contacts.data -> '#{attribute}')::integer #{matcher} #{search.to_i}#{join}"
       else
         query += "contacts.data -> '#{attribute}' #{matcher} '#{search}'#{join}"
       end
