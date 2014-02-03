@@ -6,7 +6,7 @@
 			<%= link_to "All Events", events_path %>
 		</li>
 		
-		<% Hash[@all_events.group_by(&:description).to_a.reverse].each do |k, v| %>
+		<% Hash[@all_events.group_by(&:description).sort_by{|k, v| v.count}.reverse.to_a].each do |k, v| %>
 		<% percent = @all_events_count == 0 ? 0 : number_to_human(v.count * 100.0 / @all_events_count, precision: 3, strip_insignificant_zeros: true) + "%" %>
 			<li class="<%= "selected" if params[:description] == k %>">
 				<div class="percent_bg" style="width: <%= percent %>; "></div>

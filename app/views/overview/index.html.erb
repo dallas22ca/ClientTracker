@@ -1,17 +1,12 @@
-<% if @user.contacts.count == 0 %>
+<% if @user.events.count == 0 %>
 
 	<%= render "quickstart" %>
 
 <% else %>
 
 	<%= render "time" %>
-
-	<div style="background: #eee; width: 64.5%; margin-top: 1%; margin-right: 0.5%; float: left; padding: 20px; ">
-		- Event totals by event type
-		<%= @events.group_by(&:description) %>
-	</div>
-
-	<div id="epm" data-chart="<%= @epm.to_json %>" style="width: 34.5%; margin-top: 1%; margin-left: 0.5%; float: left; height: 200px "></div>
+	<%= render "latest_events" %>
+	<%= render "epm" %>
 
 	<div class="clear"></div>
 

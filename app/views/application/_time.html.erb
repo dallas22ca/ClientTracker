@@ -3,11 +3,15 @@
 <%= form_tag request.path, id: "time_picker", method: :get, remote: true do %>
 	<div class="wide_container">
 		<%= hidden_field_tag :description, params[:description] %>
-		<%= text_field_tag :start, cookies[:start] %>
-		<%= text_field_tag :finish, cookies[:finish] %>
-		<%= select_tag :now_offset, options_for_select([["30 minutes", 30.minutes], ["1 hour", 1.hour], ["3 hours", 3.hours], ["6 hours", 6.hours], ["12 hours", 12.hours], ["1 day", 1.day], ["2 days", 2.days], ["3 days", 3.days], ["5 days", 5.days], ["1 week", 1.week], ["2 weeks", 2.weeks]], cookies[:now_offset]) %>
-		<%= label_tag :now %>
-		<%= check_box_tag :now, 1, cookies[:now].to_i == 1 ? true : false %>
+		<%= hidden_field_tag :start, cookies[:start] %>
+		<%= hidden_field_tag :finish, cookies[:finish] %>
+		<%= select_tag :now_offset, options_for_select([["30 minutes ago", 30.minutes], ["1 hour", 1.hour], ["3 hours ago", 3.hours], ["6 hours ago", 6.hours], ["12 hours ago", 12.hours], ["1 day", 1.day], ["2 days ago", 2.days], ["3 days ago", 3.days], ["5 days ago", 5.days], ["1 week", 1.week], ["2 weeks ago", 2.weeks]], cookies[:now_offset]) %>
+		until
+		<%= select_tag :muhaha, options_for_select(["Now"]) %>
+		<div style="display: none; ">
+			<%= label_tag :now %>
+			<%= check_box_tag :now, 1, cookies[:now].to_i == 1 ? true : false %>
+		</div>
 	</div>
 <% end %>
 

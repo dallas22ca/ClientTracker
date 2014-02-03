@@ -1,3 +1,6 @@
+$ ->
+	setTimeout Overview.poll, 15000
+
 $(document).on "click", ".delete_field", ->
 	$(this).closest(".field").remove()
 	false

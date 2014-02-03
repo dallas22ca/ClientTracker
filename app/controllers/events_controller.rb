@@ -36,7 +36,9 @@ class EventsController < ApplicationController
   def create
     key = params[:event][:data].delete :key
     @contact = @user.contacts.where(key: key).first_or_create
-    @event = @contact.events.new(event_params)
+    @event = @contact.events.new
+    @event.description = params[:event][:description]
+    @event.data = params[:event][:data]
     @event.user = @user
 
     respond_to do |format|
