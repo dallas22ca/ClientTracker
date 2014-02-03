@@ -1,6 +1,6 @@
 @Overview =
 	init: ->
-		$("#rpm").highcharts
+		$("#epm").highcharts
 			chart:
 				type: "area"
 			title: "Awesome"
@@ -17,7 +17,7 @@
 					year: '%e. %b'
 			yAxis:
 				title:
-					text: "Request / Minute"
+					text: "Events / Minute"
 					style:
 						color: "#777"
 				labels:
@@ -26,10 +26,10 @@
 				min: 0
 			series: [
 				lineWidth: 2
-				name: "RPM"
+				name: "E/M"
 				color: "#4AA4C9"
 				marker:
 					enabled: false
 				animation: false
-				data: $("#rpm").data("chart")
+				data: $("#epm").data("chart")
 			]
