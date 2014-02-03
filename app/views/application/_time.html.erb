@@ -1,6 +1,6 @@
 </div>
 
-<%= form_tag events_path, id: "time_picker", method: :get, remote: true do %>
+<%= form_tag request.path, id: "time_picker", method: :get, remote: true do %>
 	<div class="wide_container">
 		<%= hidden_field_tag :description, params[:description] %>
 		<%= text_field_tag :start, cookies[:start] %>

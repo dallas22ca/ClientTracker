@@ -6,5 +6,6 @@ load = ->
 	Contacts.init()
 	Segments.init()
 	Time.init()
+	Overview.init()
 
 document.addEventListener "page:change", load
