@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140126125222) do
+ActiveRecord::Schema.define(version: 20140202212111) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,12 +31,14 @@ ActiveRecord::Schema.define(version: 20140126125222) do
     t.integer  "contact_id"
     t.integer  "user_id"
     t.text     "description"
-    t.hstore   "data",        default: {}
+    t.hstore   "data",          default: {}
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.hstore   "original_data", default: {}
   end
 
   add_index "events", ["contact_id"], name: "index_events_on_contact_id", using: :btree
+  add_index "events", ["description"], name: "index_events_on_description", using: :btree
   add_index "events", ["user_id"], name: "index_events_on_user_id", using: :btree
 
   create_table "messages", force: true do |t|
@@ -95,6 +97,8 @@ ActiveRecord::Schema.define(version: 20140126125222) do
     t.string   "file_content_type"
     t.integer  "file_file_size"
     t.datetime "file_updated_at"
+    t.integer  "events_count",           default: 0
+    t.integer  "contacts_count",         default: 0
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

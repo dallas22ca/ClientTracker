@@ -1,15 +1,10 @@
-<% cache [@contact ? @contact : @user, "events", params[:page].to_i] do %>
+<% if @user.contacts.count == 0 %>
 
-	<%= will_paginate @events %>
+	<%= render "quickstart" %>
 
-	<br>
-
-	<ul>
-		<%= render @events %>
-	</ul>
-
-	<br>
-
-	<%= will_paginate @events %>
+<% else %>
+	
+	<%= render "time" %>
+	<%= render "eventer" %>
 
 <% end %>

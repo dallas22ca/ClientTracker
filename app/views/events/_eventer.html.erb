@@ -1,0 +1,42 @@
+<div id="eventer">
+
+	<ul id="event_types">
+		<li class="<%= "selected" if params[:description].blank? %>">
+			<div class="percent_bg" style="width: 100%; "></div>
+			<%= link_to "All Events", events_path %>
+		</li>
+		
+		<% Hash[@all_events.group_by(&:description).to_a.reverse].each do |k, v| %>
+		<% percent = @all_events_count == 0 ? 0 : number_to_human(v.count * 100.0 / @all_events_count, precision: 3, strip_insignificant_zeros: true) + "%" %>
+			<li class="<%= "selected" if params[:description] == k %>">
+				<div class="percent_bg" style="width: <%= percent %>; "></div>
+				<%= link_to "<span class=\"name\">#{k}</span> <span class=\"percent\">#{percent}</span>".html_safe, events_path(description: k), title: k %>
+			</li>
+		<% end %>
+	</ul>
+
+	<div id="events_wrapper">
+		<% cache [@contact ? @contact : @user, "events", params[:description], params[:page].to_i] do %>
+
+			<%= will_paginate @events %>
+
+			<br>
+
+			<ul id="events">
+				<% if @events.empty? %>
+					<li>No events!</li>
+				<% else %>
+					<%= render @events %>
+				<% end %>
+			</ul>
+
+			<br>
+
+			<%= will_paginate @events %>
+
+		<% end %>
+	</div>
+
+	<div class="clear"></div>
+	
+</div>

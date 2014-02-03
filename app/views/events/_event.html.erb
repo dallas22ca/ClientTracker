@@ -1,5 +1,14 @@
 <% cache event do %>
 	<%= content_tag_for :li, event do %>
-		<%= event.full_description_with_links.html_safe %> - <%= event.created_at.strftime("%b %d, %Y") %>
+		<p class="datestamp">
+			<span class="date">
+				<%= event.created_at.strftime("%b %-d") %>
+			</span>
+			<span class="time">
+				<%= event.created_at.strftime("%H:%M") %>
+			</span>
+		</p>
+		<p class="description"><%= event.full_description_with_links.html_safe %></p>
+		<div class="clear"></div>
 	<% end %>
 <% end %>

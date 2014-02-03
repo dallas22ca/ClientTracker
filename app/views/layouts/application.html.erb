@@ -40,13 +40,10 @@
 		_RM.push(["debug"]);
 		_RM.push(["domain", "http://localhost:3000"]);
 		_RM.push(["api_key", "VOTLf12Xko7afb1tnxBiZWMgU8AI3NjLIC8ZM5hV97eHf8"]);
-	  _RM.push(["track", "added to {{ plan }} for {{ price }}", {
+	  _RM.push(["track", "{{ name }} signed out.", {
 	    key: "dallas",
-	    plan: "Awesome Plan",
-	    price: "$9.99"
-	  }, function(data) {
-		  alert(data);
-		}]);
+			name: "Dallas Read"
+	  }]);
 	
 	  (function() {
 	    var ct = document.createElement("script"); ct.type = "text/javascript";

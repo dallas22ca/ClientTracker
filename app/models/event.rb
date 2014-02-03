@@ -3,14 +3,19 @@ class Event < ActiveRecord::Base
   belongs_to :contact
   belongs_to :user
   
+  before_save :merge_contact_data
   after_save :update_contact
   
   validates_presence_of :contact
   validates_presence_of :user
   validates_presence_of :description
   
+  def merge_contact_data
+    self.data = contact.data.merge data
+  end
+  
   def update_contact
-    contact.update_attributes data: contact.data.merge(data)
+    contact.update_attributes data: data
   end
   
   def full_description

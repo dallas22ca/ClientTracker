@@ -1,15 +1,21 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   before_action :set_contact
+  before_action :set_times, only: [:index]
 
   # GET /events
   # GET /events.json
   def index
-    if @contact
-      @events = @contact.events.includes(:contact).paginate(page: params[:page], per_page: 20)
-    else
-      @events = @user.events.includes(:contact).paginate(page: params[:page], per_page: 20)
+    resource = @contact ? @contact : @user
+    
+    unless params[:description].blank?
+      @events = resource.events.where(description: params[:description], created_at: @start..@finish).order("events.created_at desc").includes(:contact).paginate(page: params[:page], per_page: 20)
     end
+    
+    @events ||= resource.events.where(created_at: @start..@finish).order("events.created_at desc").includes(:contact).paginate(page: params[:page], per_page: 20)
+    
+    @all_events = resource.events.where(created_at: @start..@finish)
+    @all_events_count = @all_events.count
   end
 
   # GET /events/1

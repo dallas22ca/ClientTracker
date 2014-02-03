@@ -1,14 +1,31 @@
 ## Todo
 
-- Choose a name
-- Push to Server
-- Script on Amazon
-- Add to Lively Plugin
-- Add to Lively Script
-- Add to CoScreen Plugin
-- Add to CoScreen Script
+- Charts
+- PHP library for paypal lively hook
+- HTTPS://secure.remetric.com/contacts/save/img?api_key=XXX&key=dallas&name=DallasBase64
+- HTTPS://secure.remetric.com/contacts/overwrite/img?api_key=XXX&key=dallas&name=DallasBase64
+- HTTPS://secure.remetric.com/contacts/save/redirect?api_key=XXX&url=Google.com&key=dallas&name=Dallas
+- HTTPS://secure.remetric.com/contacts/overwrite/redirect?api_key=XXX&url=Google.com&key=dallas&name=Dallas
+- HTTPS://secure.remetric.com/events/img?api_key=XXX&key=dallas&name=DallasBase64
+- HTTPS://secure.remetric.com/events/redirect?api_key=XXX&url=Google.com&key=dallas&name=Dallas
+- Developer docs for remetric
+- Setup instructions
+- Remetric blog post
 - Search
-  
+
+## Useful Event Charts
+
+- How many signups this week/day/month
+- Click to see details of events in time period
+- List of events by popularity
+- Map of event locations
+- Browser/Device info
+- Chart where specific var is queried
+
+## Useful Contact Charts
+
+- How many added this week/day/month
+- 10 recents?
 
 ## How to Use
 

@@ -10,6 +10,8 @@ Remetric::Application.routes.draw do
   post "/contacts/save" => "contacts#save", as: :save_contact
   post "/contacts/overwrite" => "contacts#overwrite", as: :overwrite_contact
   
+  get "/contacts/overview" => "overview#contacts", as: :contacts_overview
+  
   resources :segments do
     resources :contacts, only: [:index]
   end
@@ -25,7 +27,7 @@ Remetric::Application.routes.draw do
     mount Sidekiq::Web => "/sidekiq"
   end
 
-  root 'contacts#index'
+  root "overview#index"
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
