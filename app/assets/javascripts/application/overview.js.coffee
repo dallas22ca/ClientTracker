@@ -33,9 +33,9 @@
 							color: "#cccccc"
 					min: 0
 				series: [
-					lineWidth: 2
 					name: "E/M"
 					color: "#4AA4C9"
+					lineWidth: 2
 					marker:
 						enabled: false
 					animation: false
@@ -45,30 +45,32 @@
 	drawLatestEvents: ->
 		if typeof $("#latest_events").data("chart") != "undefined"
 			$("#latest_events").highcharts
+				chart:
+					type: "area"
+				title:
+					text: "Latest Events"
+					style:
+						color: "#777"
+					x: 20
+				xAxis:
+					type: "datetime"
+					dateTimeLabelFormats:
+						second: '%e. %b'
+						minute: '%e. %b'
+						hour: '%e. %B'
+						day: '%e. %b'
+						week: '%e. %b'
+						month: '%e. %b'
+						year: '%e. %b'
+				yAxis:
 					title:
-						text: "Latest Events"
-						style:
-							color: "#777"
-						x: 20
-					xAxis:
-						type: "datetime"
-						dateTimeLabelFormats:
-							second: '%e. %b'
-							minute: '%e. %b'
-							hour: '%e. %B'
-							day: '%e. %b'
-							week: '%e. %b'
-							month: '%e. %b'
-							year: '%e. %b'
-					yAxis:
-						title:
-							text: "Events"
-					legend:
-						borderWidth: 0
-						layout: "vertical"
-					tooltip:
-						shared: true
-					series: $("#latest_events").data("chart")
+						text: "Events"
+				legend:
+					borderWidth: 0
+					layout: "vertical"
+				tooltip:
+					shared: true
+				series: $("#latest_events").data("chart")
 	
 	poll: ->
 		$.getScript window.location.href, ->

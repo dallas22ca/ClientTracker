@@ -56,28 +56,28 @@ class ContactsController < ApplicationController
     end
   end
   
-  def save
-    key = params[:contact][:data].delete :key
-    @contact = Contact.where(key: key, user_id: @user.id).first_or_initialize
-    @contact.update_attributes data: @contact.data.merge(params[:contact][:data])
-    
-    respond_to do |format|
-      format.html { redirect_to @contact, notice: 'Contact was successfully updated.' }
-      format.json { render action: "show" }
-    end
-  end
-  
-  def overwrite
-    key = params[:contact][:data].delete :key
-    @contact = Contact.where(key: key, user_id: @user.id).first_or_initialize
-    @contact.data = params[:contact][:data]
-    @contact.save
-    
-    respond_to do |format|
-      format.html { redirect_to @contact, notice: 'Contact was successfully updated.' }
-      format.json { render action: "show" }
-    end
-  end
+  # def save
+  #   key = key = params[:event][:data][:contact][:key]
+  #   @contact = Contact.where(key: key, user_id: @user.id).first_or_initialize
+  #   @contact.update_attributes data: @contact.data.merge(params[:contact][:data])
+  #   
+  #   respond_to do |format|
+  #     format.html { redirect_to @contact, notice: 'Contact was successfully updated.' }
+  #     format.json { render action: "show" }
+  #   end
+  # end
+  # 
+  # def overwrite
+  #   key = key = params[:event][:data][:contact][:key]
+  #   @contact = Contact.where(key: key, user_id: @user.id).first_or_initialize
+  #   @contact.data = params[:contact][:data]
+  #   @contact.save
+  #   
+  #   respond_to do |format|
+  #     format.html { redirect_to @contact, notice: 'Contact was successfully updated.' }
+  #     format.json { render action: "show" }
+  #   end
+  # end
 
   # DELETE /contacts/1
   # DELETE /contacts/1.json

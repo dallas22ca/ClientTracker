@@ -4,12 +4,12 @@ Remetric::Application.routes.draw do
   
   devise_for :users
   
+  get "/events/img/:args" => "events#img", as: :event_img, format: :gif
+  get "/events/redirect/:args" => "events#img", as: :event_redirect, format: :gif
   get "/import" => "import#upload", as: :import
   match "/import/processing" => "import#processing", via: [:get, :patch], as: :import_processing
-
   post "/contacts/save" => "contacts#save", as: :save_contact
   post "/contacts/overwrite" => "contacts#overwrite", as: :overwrite_contact
-  
   get "/contacts/overview" => "overview#contacts", as: :contacts_overview
   
   resources :segments do

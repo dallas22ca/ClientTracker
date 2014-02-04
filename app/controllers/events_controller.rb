@@ -34,7 +34,7 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    key = params[:event][:data].delete :key
+    key = params[:event][:data][:contact][:key]
     @contact = @user.contacts.where(key: key).first_or_create
     @event = @contact.events.new
     @event.description = params[:event][:description]
@@ -49,6 +49,30 @@ class EventsController < ApplicationController
         format.html { render action: 'new' }
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
+    end
+  end
+  
+  # GET /events/img
+  def img
+    @user = false
+    
+    begin
+      args = JSON.parse(Base64.decode64(params[:args])).to_hash.with_indifferent_access
+      @user = User.where(api_key: args.delete(:api_key)).first
+      key = args[:contact].delete(:key)
+      @contact = @user.contacts.where(key: key).first_or_create
+      @event = @contact.events.new
+      @event.description = args.delete(:description)
+      @event.data = args
+      @event.user = @user
+      @event.save
+    rescue
+    end
+    
+    if args[:redirect].to_s.blank?
+      send_data(Base64.decode64("R0lGODlhAQABAPAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="), :type => "image/gif", :disposition => "inline")
+    else
+      redirect_to args[:redirect]
     end
   end
 

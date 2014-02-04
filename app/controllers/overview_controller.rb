@@ -34,7 +34,16 @@ class OverviewController < ApplicationController
         time += batch_duration.seconds
       end
       
-      d = { name: k, animation: false, data: data }
+      d = { 
+        name: k, 
+        animation: false, 
+        lineWidth: 2, 
+        marker: { 
+          enabled: false 
+        },
+        data: data
+      }
+
       @latest_events.push d
     end
   end

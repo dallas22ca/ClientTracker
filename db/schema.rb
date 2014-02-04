@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140203031949) do
+ActiveRecord::Schema.define(version: 20140204024207) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,10 +31,11 @@ ActiveRecord::Schema.define(version: 20140203031949) do
     t.integer  "contact_id"
     t.integer  "user_id"
     t.text     "description"
-    t.hstore   "data",          default: {}
+    t.hstore   "data",             default: {}
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.hstore   "original_data", default: {}
+    t.hstore   "original_data",    default: {}
+    t.hstore   "contact_snapshot", default: {}
   end
 
   add_index "events", ["contact_id"], name: "index_events_on_contact_id", using: :btree

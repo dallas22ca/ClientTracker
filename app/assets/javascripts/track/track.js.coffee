@@ -7,10 +7,6 @@ Remetric.debug = false
 Remetric.log = (data) ->
 	console.log data if Remetric.debug
 
-Remetric.responder = (response, callback) ->
-	callback(response) if typeof callback == "function"
-	Remetric.log response
-
 Remetric.detectPushes = ->
 	@_RM ||= []
 
@@ -20,23 +16,6 @@ Remetric.detectPushes = ->
 		setTimeout Remetric.parseEvents, 20
 		a
 
-Remetric.contacts = (path, data, callback = false) ->
-	Zepto.post "#{Remetric.domain}/contacts#{path}.json",
-		api_key: Remetric.api_key
-		contact:
-			data: data
-	, (response) ->
-		Remetric.responder response, callback
-
-Remetric.track = (description, data, callback = false) ->
-	Zepto.post "#{Remetric.domain}/events.json",
-		api_key: Remetric.api_key
-		event:
-			data: data
-			description: description
-	, (response) ->
-		Remetric.responder response, callback
-
 Remetric.parseEvents = ->
 	for event in _RM
 		event = _RM.shift()
@@ -44,16 +23,9 @@ Remetric.parseEvents = ->
 		if event[0] == "domain"
 			Remetric.domain = event[1]
 			Remetric.log "Remetric domain is set to #{Remetric.domain}."
-		else if event[0] == "saveContact"
-			Remetric.log "Remetric is attempting to save contact..."
-			Remetric.contacts "/save", event[1], event[2], event[3]
-		else if event[0] == "overwriteContact"
-			Remetric.log "Remetric is attempting to replace contact..."
-			Remetric.contacts "/overwrite", event[1], event[2], event[3]
 		else if event[0] == "track"
-			desc = Mustache.render event[1], event[2]
-			Remetric.log "Remetric is tracking \"#{desc}\" for #{event[1]}..."
-			Remetric.track event[1], event[2], event[3]
+			Remetric.log "Remetric has tracked \"#{event[1]}\"."
+			Remetric.track event[1], event[2]
 		else if event[0] == "api_key"
 			Remetric.api_key = event[1]
 			Remetric.log "Remetric API Key is set to #{Remetric.api_key}."
@@ -62,5 +34,15 @@ Remetric.parseEvents = ->
 			Remetric.log "Remetric is set to debug mode."
 
 	Remetric.detectPushes()
+
+Remetric.track = (description, data) ->
+	img = document.createElement("img")
+	img.style.display = "none"
+	params = data
+	params["api_key"] = Remetric.api_key
+	params["description"] = description
+	base64 = btoa(JSON.stringify(params))
+	img.src = "#{Remetric.domain}/events/img/#{base64}.gif"
+	document.body.appendChild img
 
 Remetric.parseEvents()
