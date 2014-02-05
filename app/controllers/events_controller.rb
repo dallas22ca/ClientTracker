@@ -35,7 +35,7 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     key = params[:event][:contact][:key]
-    @contact = @user.contacts.where(key: key).first_or_create
+    @contact = @user.contacts.where(key: key.parameterize).first_or_create
     @event = @contact.events.new
     @event.created_at = Time.zone.at(params[:event].delete(:remetric_created_at).to_i) if params[:event].has_key? :remetric_created_at
     @event.description = params[:event].delete(:description)
@@ -61,7 +61,7 @@ class EventsController < ApplicationController
       args = JSON.parse(Base64.decode64(params[:args])).to_hash.with_indifferent_access
       @user = User.where(api_key: args.delete(:remetric_api_key)).first
       key = args[:contact].delete(:key)
-      @contact = @user.contacts.where(key: key).first_or_create
+      @contact = @user.contacts.where(key: key.parameterize).first_or_create
       @event = @contact.events.new
       @event.created_at = Time.zone.at(args.delete(:remetric_created_at).to_i) unless args.has_key? :remetric_created_at
       @event.description = args.delete(:description)
