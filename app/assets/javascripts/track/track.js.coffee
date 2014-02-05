@@ -35,14 +35,13 @@ Remetric.parseEvents = ->
 
 	Remetric.detectPushes()
 
-Remetric.track = (description, data) ->
+Remetric.track = (data) ->
 	img = document.createElement("img")
 	img.style.display = "none"
 	params = data
-	params["api_key"] = Remetric.api_key
-	params["description"] = description
-	base64 = btoa(JSON.stringify(params))
-	img.src = "#{Remetric.domain}/events/img/#{base64}.gif"
+	params["remetric_api_key"] = Remetric.api_key
+	base64 = encodeURIComponent btoa(JSON.stringify(params))
+	img.src = "#{Remetric.domain}/events/img/#{base64}"
 	document.body.appendChild img
 
 Remetric.parseEvents()

@@ -13,7 +13,11 @@
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
 	z-index: 999;
 	
-  #logo img {
+	#loading_logo {
+		display: none;
+	}
+	
+  #loading_logo img, #logo img {
     display: inline-block;
     margin-right: 39px;
     margin-top: 5px;

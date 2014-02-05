@@ -53,6 +53,8 @@
 						color: "#777"
 					x: 20
 				xAxis:
+					crosshair:
+						snap: true
 					type: "datetime"
 					dateTimeLabelFormats:
 						second: '%e. %b'
@@ -73,7 +75,13 @@
 				series: $("#latest_events").data("chart")
 	
 	poll: ->
+		$("#logo").hide()
+		$("#loading_logo").show()
+		
 		$.getScript window.location.href, ->
+			$("#logo").show()
+			$("#loading_logo").hide()
+			
 			setTimeout ->
 				Overview.poll()
 			, 15000

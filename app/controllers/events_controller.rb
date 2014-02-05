@@ -9,10 +9,10 @@ class EventsController < ApplicationController
     resource = @contact ? @contact : @user
     
     unless params[:description].blank?
-      @events = resource.events.where(description: params[:description], created_at: @start..@finish).order("events.created_at desc").includes(:contact).paginate(page: params[:page], per_page: 20)
+      @events = resource.events.includes(:contact).where(description: params[:description], created_at: @start..@finish).order("events.created_at desc").references(:contact).paginate(page: params[:page], per_page: 20)
     end
     
-    @events ||= resource.events.where(created_at: @start..@finish).order("events.created_at desc").includes(:contact).paginate(page: params[:page], per_page: 20)
+    @events ||= resource.events.includes(:contact).where(created_at: @start..@finish).references(:contact).order("events.created_at desc").paginate(page: params[:page], per_page: 20)
     
     @all_events = resource.events.where(created_at: @start..@finish)
     @all_events_count = @all_events.count
@@ -34,11 +34,12 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    key = params[:event][:data][:contact][:key]
+    key = params[:event][:contact][:key]
     @contact = @user.contacts.where(key: key).first_or_create
     @event = @contact.events.new
-    @event.description = params[:event][:description]
-    @event.data = params[:event][:data]
+    @event.created_at = Time.zone.at(params[:event].delete(:remetric_created_at).to_i) if params[:event].has_key? :remetric_created_at
+    @event.description = params[:event].delete(:description)
+    @event.data = params[:event]
     @event.user = @user
 
     respond_to do |format|
@@ -58,10 +59,11 @@ class EventsController < ApplicationController
     
     begin
       args = JSON.parse(Base64.decode64(params[:args])).to_hash.with_indifferent_access
-      @user = User.where(api_key: args.delete(:api_key)).first
+      @user = User.where(api_key: args.delete(:remetric_api_key)).first
       key = args[:contact].delete(:key)
       @contact = @user.contacts.where(key: key).first_or_create
       @event = @contact.events.new
+      @event.created_at = Time.zone.at(args.delete(:remetric_created_at).to_i) unless args.has_key? :remetric_created_at
       @event.description = args.delete(:description)
       @event.data = args
       @event.user = @user
