@@ -47,7 +47,7 @@ class EventsController < ApplicationController
         format.html { redirect_to contact_event_url(@contact, @event), notice: 'Event was successfully created.' }
         format.json { render action: 'show', status: :created, location: contact_event_url(@contact, @event) }
       else
-        p @event.errors.full_messages.to_json
+        p @event.errors.to_json
         format.html { render action: 'new' }
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
