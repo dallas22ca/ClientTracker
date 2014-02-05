@@ -4,13 +4,13 @@ class ApplicationController < ActionController::Base
   before_filter :authenticate_user_from_api_key!, if: Proc.new { (params[:api_key] || params[:remetric_api_key]) && request.format == :json }
   before_filter :authenticate_user!
   before_filter :set_user
-  around_filter :set_time_zone, if: :current_user
+  around_filter :set_time_zone, if: Proc.new { @user }
   before_filter :set_time_cookies
   
   private
   
   def set_time_zone(&block)
-    Time.use_zone(@user.time_zone, &block) if @user
+    Time.use_zone(@user.time_zone, &block)
   end
   
   def set_time_cookies

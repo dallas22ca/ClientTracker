@@ -63,7 +63,7 @@ class EventsController < ApplicationController
       key = args[:contact].delete(:key).parameterize
       @contact = @user.contacts.where(key: key).first_or_create
       @event = @contact.events.new
-      @event.created_at = Time.zone.at(args.delete(:remetric_created_at).to_i) unless args.has_key? :remetric_created_at
+      @event.created_at = Time.zone.at(args.delete(:remetric_created_at).to_i) if args.has_key? :remetric_created_at
       @event.description = args.delete(:description)
       @event.data = args
       @event.user = @user
