@@ -36,23 +36,18 @@ class EventsController < ApplicationController
   def create
     key = params[:event][:contact][:key]
     @contact = @user.contacts.where(key: key.parameterize).first_or_create
-    p "1=======#{@contact}========="
     @event = @contact.events.new
-    p "2=======#{@event}========="
     @event.created_at = Time.zone.at(params[:event].delete(:remetric_created_at).to_i) if params[:event].has_key? :remetric_created_at
-    p "3=======#{@event}========="
     @event.description = params[:event].delete(:description)
-    p "4=======#{@event}========="
     @event.data = params[:event]
-    p "5=======#{@event}========="
     @event.user = @user
-    p "6=======#{@event}========="
 
     respond_to do |format|
       if @event.save
         format.html { redirect_to contact_event_url(@contact, @event), notice: 'Event was successfully created.' }
         format.json { render action: 'show', status: :created, location: contact_event_url(@contact, @event) }
       else
+        p @event.errors.full_messages.to_json
         format.html { render action: 'new' }
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
