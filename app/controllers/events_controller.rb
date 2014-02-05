@@ -34,20 +34,21 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    key = params[:event][:contact][:key]
-    @contact = @user.contacts.where(key: key.parameterize).first_or_create
+    key = params[:event][:contact].delete(:key).parameterize
+    @contact = @user.contacts.where(key: key).first_or_create
+    p "=====#{@contact}======= #{@contact.valid?} ========"
     @event = @contact.events.new
     @event.created_at = Time.zone.at(params[:event].delete(:remetric_created_at).to_i) if params[:event].has_key? :remetric_created_at
     @event.description = params[:event].delete(:description)
     @event.data = params[:event]
     @event.user = @user
+    p "=====#{@event.to_json} ===== #{@event.valid?} ======="
 
     respond_to do |format|
-      if @event.save
+      if @event.save!
         format.html { redirect_to contact_event_url(@contact, @event), notice: 'Event was successfully created.' }
         format.json { render action: 'show', status: :created, location: contact_event_url(@contact, @event) }
       else
-        p @event.errors.to_json
         format.html { render action: 'new' }
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
@@ -61,8 +62,8 @@ class EventsController < ApplicationController
     begin
       args = JSON.parse(Base64.decode64(params[:args])).to_hash.with_indifferent_access
       @user = User.where(api_key: args.delete(:remetric_api_key)).first
-      key = args[:contact].delete(:key)
-      @contact = @user.contacts.where(key: key.parameterize).first_or_create
+      key = args[:contact].delete(:key).parameterize
+      @contact = @user.contacts.where(key: key).first_or_create
       @event = @contact.events.new
       @event.created_at = Time.zone.at(args.delete(:remetric_created_at).to_i) unless args.has_key? :remetric_created_at
       @event.description = args.delete(:description)
