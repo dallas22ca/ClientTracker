@@ -1,20 +1,11 @@
 ## Todo
 
-- Charts
-- PHP library for paypal lively hook
-- HTTPS://secure.remetric.com/contacts/save/img?api_key=XXX&key=dallas&name=DallasBase64
-- HTTPS://secure.remetric.com/contacts/overwrite/img?api_key=XXX&key=dallas&name=DallasBase64
-- HTTPS://secure.remetric.com/contacts/save/redirect?api_key=XXX&url=Google.com&key=dallas&name=Dallas
-- HTTPS://secure.remetric.com/contacts/overwrite/redirect?api_key=XXX&url=Google.com&key=dallas&name=Dallas
-- HTTPS://secure.remetric.com/events/img?api_key=XXX&key=dallas&name=DallasBase64
-- HTTPS://secure.remetric.com/events/redirect?api_key=XXX&url=Google.com&key=dallas&name=Dallas
-- Developer docs for remetric
-- Setup instructions
-- Remetric blog post
+- Blog post
 - Search
 
 ## Useful Event Charts
 
+- See all events where product_name == Lively
 - How many signups this week/day/month
 - Click to see details of events in time period
 - List of events by popularity

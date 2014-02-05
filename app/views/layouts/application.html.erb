@@ -13,7 +13,9 @@
 	
 	<%= render "nav", placeholder: false %>
 	<%= render "nav", placeholder: true %>
-
+	
+	<%= render "time" if [root_path, events_path].include? request.path %>
+	
 	<div id="yield" class="wide_container">
 		<%= yield %>
 	</div>

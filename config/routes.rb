@@ -1,6 +1,6 @@
 require "sidekiq/web"
 
-Remetric::Application.routes.draw do
+Rem::Application.routes.draw do
   
   devise_for :users
   

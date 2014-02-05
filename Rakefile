@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Remetric::Application.load_tasks
+Rem::Application.load_tasks
