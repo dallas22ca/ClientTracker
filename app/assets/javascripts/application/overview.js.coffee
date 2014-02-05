@@ -14,6 +14,8 @@
 						color: "#777"
 				legend: false
 				xAxis:
+					crosshair:
+						snap: true
 					type: "datetime"
 					dateTimeLabelFormats:
 						second: '%e. %b'
