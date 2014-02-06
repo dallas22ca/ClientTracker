@@ -6,7 +6,7 @@
 
 	<h1>Listing contacts</h1>
 
-	<% cache [@segment ? @segment : @user, "contacts", params[:page].to_i] do %>
+	<% cache [@user, @segment ? @segment : "index", "contacts", params[:page].to_i] do %>
 
 		<%= will_paginate @contacts %>
 
