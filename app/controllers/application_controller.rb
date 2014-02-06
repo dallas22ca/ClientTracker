@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   before_filter :authenticate_user_from_api_key!, if: :api_hit?
   before_filter :authenticate_user!, unless: :img_hit?
   before_filter :set_user
-  around_filter :set_time_zone
+  before_filter :set_time_zone
   before_filter :set_time_cookies
   
   private
