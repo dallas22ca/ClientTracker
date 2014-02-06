@@ -3,6 +3,6 @@
 	  <td><%= link_to contact.key.to_s, contact %></td>
 		<td><%= link_to contact.data["name"].to_s, contact %></td>
 		<td><%= link_to contact.data["email"].to_s, contact %></td>
-		<td><%= link_to contact.data["domain"].to_s, contact %></td>
+		<td><%= link_to contact.data["domain"].to_s, contact.data["domain"].to_s == "" ? contact : "http://#{contact.data["domain"]}" %></td>
 	</tr>
 <% end %>
