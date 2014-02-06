@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   end
   
   def set_time_zone
-    Time.use_zone @user.time_zone if @user
+    Time.zone = @user.time_zone if @user
   end
   
   def set_time_cookies
