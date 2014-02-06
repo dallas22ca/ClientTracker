@@ -4,6 +4,5 @@
 		<td><%= link_to contact.data["name"].to_s, contact %></td>
 		<td><%= link_to contact.data["email"].to_s, contact %></td>
 		<td><%= link_to contact.data["website"].to_s, contact.data["website"].to_s == "" ? contact : "http://#{contact.data["website"]}" %></td>
-		<td><%= link_to "x", contact, method: :delete, data: { confirm: "Are you sure you want to delete this contact and their events?" }%></td>
 	</tr>
 <% end %>

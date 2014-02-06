@@ -20,4 +20,5 @@
 <br>
 
 <%= link_to 'Edit', edit_contact_path(@contact) %> |
+<%= link_to "Delete", @contact, method: :delete, data: { confirm: "Are you sure you want to delete this contact and their events?" } %> |
 <%= link_to 'Back', contacts_path %>
