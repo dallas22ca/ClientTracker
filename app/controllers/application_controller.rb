@@ -17,8 +17,8 @@ class ApplicationController < ActionController::Base
     action_name == "img"
   end
   
-  def set_time_zone(&block)
-    Time.use_zone(@user.time_zone, &block) if @user
+  def set_time_zone
+    Time.use_zone @user.time_zone if @user
   end
   
   def set_time_cookies
