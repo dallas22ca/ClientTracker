@@ -1,0 +1,4 @@
+var breakdown = $("#event_<%= params[:event_id] %>").find(".breakdown");
+$(".breakdown").hide();
+breakdown.html("<%= j render "breakdown" %>").fadeIn(150);
+Analysis.loadGraph( breakdown.find(".graph") );

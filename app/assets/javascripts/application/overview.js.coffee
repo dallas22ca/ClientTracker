@@ -17,14 +17,6 @@
 					crosshair:
 						snap: true
 					type: "datetime"
-					dateTimeLabelFormats:
-						second: '%e. %b'
-						minute: '%e. %b'
-						hour: '%e. %B'
-						day: '%e. %b'
-						week: '%e. %b'
-						month: '%e. %b'
-						year: '%e. %b'
 				yAxis:
 					title:
 						text: false
@@ -58,14 +50,6 @@
 					crosshair:
 						snap: true
 					type: "datetime"
-					dateTimeLabelFormats:
-						second: '%e. %b'
-						minute: '%e. %b'
-						hour: '%e. %B'
-						day: '%e. %b'
-						week: '%e. %b'
-						month: '%e. %b'
-						year: '%e. %b'
 				yAxis:
 					title:
 						text: "Events"

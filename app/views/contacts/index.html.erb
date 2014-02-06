@@ -1,13 +1,3 @@
-<ul>
-	<li><%= link_to "Import Contacts", import_path, class: "#{"selected" if request.path == import_path}" %></li>
-	<li><%= link_to "New Contact", new_contact_path, class: "#{"selected" if request.path == new_contact_path}" %></li>
-	<li><%= link_to "All Contacts", root_path %></li>
-	<li><%= link_to "Segments", segments_path, class: "#{"selected" if request.path == segments_path}" %></li>
-	<% @user.segments.each do |segment| %>
-		<li><%= link_to "Show #{segment.name} Contacts", segment_contacts_path(segment) %></li>
-	<% end %>
-</ul>
-
 <% if @user.contacts.count == 0 %>
 
 	<%= render "quickstart" %>
@@ -16,25 +6,19 @@
 
 	<h1>Listing contacts</h1>
 
-	<br>
-
-	<%= link_to "New Contact", new_contact_path %>
-
-	<br><br>
-
 	<% cache [@segment ? @segment : @user, "contacts", params[:page].to_i] do %>
 
 		<%= will_paginate @contacts %>
 
 		<br>
 
-		<table>
+		<table class="table">
 		  <thead>
 		    <tr>
 		      <th>Key</th>
-		      <th>Data</th>
-		      <th></th>
-		      <th></th>
+		      <th>Name</th>
+		      <th>Email</th>
+					<th>Domain</th>
 		    </tr>
 		  </thead>
 

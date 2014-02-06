@@ -1,25 +1,23 @@
-<p id="notice"><%= notice %></p>
+<h1><%= @contact.key %></h1>
 
 <p>
-  <strong>User:</strong>
-  <%= @contact.user %>
-</p>
-
-<p>
-  <strong>Key:</strong>
-  <%= @contact.key %>
-</p>
-
-<p>
-  <strong>Data:</strong>
-  <%= @contact.data %>
-</p>
-
-<ul>
-	<% @contact.segments.each do |segment| %>
-		<li><%= link_to segment.name, segment %></li>
+  <% @contact.data.each do |k, v| %>
+		<b><%= k %></b>: <%= v %><br>
 	<% end %>
-</ul>
+</p>
+
+<br>
+
+<div style="width: 40%; background: #eee; border: 1px solid #ddd; border-radius: 6px; padding: 15px;">
+	<p><b>A part of these segments:</b><br><br></p>
+	<ul>
+		<% @contact.segments.each do |segment| %>
+			<li><%= link_to segment.name, segment %></li>
+		<% end %>
+	</ul>
+</div>
+
+<br>
 
 <%= link_to 'Edit', edit_contact_path(@contact) %> |
 <%= link_to 'Back', contacts_path %>

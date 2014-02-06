@@ -1,0 +1,33 @@
+.table {
+	font-size: 16px;
+	width: 100%;
+	border-left: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+	
+	tr {
+		&:hover {
+			background: #f3f3f3;
+		}
+		
+		th {
+			border-top: 1px solid #ddd;
+			border-bottom: 1px solid #ddd;
+			padding: 6px 9px;
+			text-align: left;
+			background: #ddd;
+			font-size: 12px;
+			color: #777;
+			text-transform: uppercase;
+		}
+		
+		td {
+			border-top: 1px solid #ddd;
+			border-bottom: 1px solid #ddd;
+			
+			a {
+				padding: 9px;
+				display: block;
+			}
+		}
+	}
+}

@@ -21,7 +21,7 @@ set :whenever_command, "bundle exec whenever"
 set :server_name, "107.170.24.138"
 set :rails_env, "production"
 set :branch, "master"
-set :root_url, "https://www.netbuild.co"
+set :root_url, "https://secure.remetric.com"
 server server_name, :web, :app, :db, primary: true
 set :whenever_command, "bundle exec whenever"
 

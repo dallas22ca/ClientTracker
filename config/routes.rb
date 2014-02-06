@@ -6,6 +6,7 @@ Rem::Application.routes.draw do
   
   get "/events/img/:args" => "events#img", as: :event_img, format: :gif
   get "/events/redirect/:args" => "events#img", as: :event_redirect, format: :gif
+  get "/events/analysis" => "events#analysis", as: :event_analysis
   get "/import" => "import#upload", as: :import
   match "/import/processing" => "import#processing", via: [:get, :patch], as: :import_processing
   post "/contacts/save" => "contacts#save", as: :save_contact

@@ -107,6 +107,47 @@
 			a {
 				color: #4094B5;
 			}
+			
+			.breakdown {
+				display: none;
+				background: #eee;
+				clear: both;
+				margin-left: 80px;
+				padding: 13px;
+				border-radius: 7px;
+				border: 1px solid #ddd;
+				
+				h4 {
+					font-weight: 600;
+					font-size: 18px;
+					line-height: 26px;
+					display: inline-block;
+				}
+				
+				.tag {
+					display: inline-block;
+					color: #777;
+					font-size: 15px;
+					margin-left: 20px;
+				}
+				
+				.graph {
+					margin-top: 10px;
+					height: 130px;
+					position: relative;
+
+					.graph_loading {
+						position: absolute;
+						top: 47%;
+						left: 0;
+						right: 0;
+						bottom: 0;
+						text-align: center;
+						color: #aaa;
+						font-size: 13px;
+					}
+				}
+			}
 		}
 	}
 }

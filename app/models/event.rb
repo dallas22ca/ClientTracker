@@ -23,7 +23,7 @@ class Event < ActiveRecord::Base
   def full_description_with_links
     linked_data = {}
     contact_data = contact_snapshot
-    data.map { |k,v| linked_data[k] = ActionController::Base.helpers.link_to(v, Rails.application.routes.url_helpers.contact_event_path(contact, self)) }
+    data.map { |k,v| linked_data[k] = ActionController::Base.helpers.link_to(v, Rails.application.routes.url_helpers.event_analysis_path(event_id: id, q: [[k, "=", v]]), remote: true) }
     contact_data.map { |k,v| contact_data[k] = ActionController::Base.helpers.link_to(v, Rails.application.routes.url_helpers.contact_path(contact)) }
     Liquid::Template.parse(description).render(linked_data.merge({ "contact" => contact_data }))
   end
