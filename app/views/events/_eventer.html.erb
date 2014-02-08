@@ -3,25 +3,23 @@
 	<%= render "event_types" %>
 
 	<div id="events_wrapper">
-		<% cache [@contact ? @contact : @user, "events", params[:description], params[:page].to_i] do %>
 
-			<%= will_paginate @events %>
+		<%= will_paginate @events %>
 
-			<br>
+		<br>
 
-			<ul id="events">
-				<% if @events.empty? %>
-					<li>No events!</li>
-				<% else %>
-					<%= render @events %>
-				<% end %>
-			</ul>
+		<ul id="events">
+			<% if @events.empty? %>
+				<li>No events!</li>
+			<% else %>
+				<%= render @events %>
+			<% end %>
+		</ul>
 
-			<br>
+		<br>
 
-			<%= will_paginate @events %>
+		<%= will_paginate @events %>
 
-		<% end %>
 	</div>
 
 	<div class="clear"></div>

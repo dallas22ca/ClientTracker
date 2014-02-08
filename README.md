@@ -1,7 +1,16 @@
 ## Todo
 
+- Event index query
+- Subscriptions
 - Blog post
 - Search
+- Quickstart
+- Contact Search
+- Event Search
+- Delta graph query
+- Contact Show
+- Contact Index
+- Mobile
 
 ## Useful Event Charts
 
