@@ -35,7 +35,7 @@ class OverviewController < ApplicationController
       end
       
       d = { 
-        name: k, 
+        name: "#{k} (#{v.count} events)", 
         animation: false, 
         lineWidth: 2, 
         marker: { 

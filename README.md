@@ -1,5 +1,6 @@
 ## Todo
 
+- Set specific dates
 - Event index query
 - Subscriptions
 - Blog post
