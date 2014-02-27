@@ -1,5 +1,4 @@
 class EventsController < ApplicationController
-  skip_before_filter :verify_authenticity_token, only: [:create]
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   before_action :set_contact
   before_action :set_times, only: [:index]

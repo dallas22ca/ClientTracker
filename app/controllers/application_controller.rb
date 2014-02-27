@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   private
   
   def api_hit?
-    params[:api_key] && request.format == :json
+    (params[:remetric_api_key] || params[:api_key]) && request.format == :json
   end
   
   def img_hit?
