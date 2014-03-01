@@ -4,17 +4,15 @@ class Event < ActiveRecord::Base
   belongs_to :user
   belongs_to :segment
   
-  before_create :merge_contact_data
+  after_commit :sync_segmentizations
+  after_destroy :sync_segmentizations
   
   validates_presence_of :contact
   validates_presence_of :user
   validates_presence_of :description
   
-  def merge_contact_data
-    contact.data ||= {}
-    self.data ||= {}
-    self.contact_snapshot = contact.data.merge(self.data.delete(:contact))
-    contact.update_attributes data: self.contact_snapshot
+  def sync_segmentizations
+    user.segments.map { |s| s.sidekiq_sync_segmentizations } if user
   end
   
   def full_description
