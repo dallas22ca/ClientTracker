@@ -42,13 +42,14 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     key = params[:event][:contact].delete(:key).parameterize
-    @contact = @user.contacts.where(key: key).first_or_create
-    @contact.update_attributes(data: @contact.data.merge(args[:contact]))
+    @contact = @user.contacts.where(key: key).first_or_initialize
+    @contact.update_attributes(data: @contact.data.merge(params[:event].delete(:contact)))
     @event = @contact.events.new
     @event.created_at = Time.zone.at(params[:event].delete(:remetric_created_at).to_i) if params[:event].has_key? :remetric_created_at
     @event.description = params[:event].delete(:description)
     @event.data = params[:event]
     @event.user = @user
+    @event.contact_snapshot = @contact.data
 
     respond_to do |format|
       if @event.save
@@ -70,11 +71,12 @@ class EventsController < ApplicationController
       @user = User.where(api_key: args.delete(:remetric_api_key)).first
       key = args[:contact].delete(:key).parameterize
       @contact = @user.contacts.where(key: key).first_or_initialize
-      @contact.update_attributes(data: @contact.data.merge(args[:contact]))
+      @contact.update_attributes(data: @contact.data.merge(args.delete(:contact)))
       @event = @contact.events.new
       @event.created_at = Time.zone.at(args.delete(:remetric_created_at).to_i) if args.has_key? :remetric_created_at
       @event.description = args.delete(:description)
       @event.data = args
+      @event.contact_snapshot = @contact.data
       @event.user = @user
       @event.save
     rescue
