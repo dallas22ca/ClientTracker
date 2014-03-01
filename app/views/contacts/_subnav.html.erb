@@ -4,10 +4,6 @@
 			<li><%= link_to "All Contacts", contacts_path %></li>
 			<li><%= link_to "Import Contacts", import_path, class: "#{"selected" if request.path == import_path}" %></li>
 			<li><%= link_to "New Contact", new_contact_path, class: "#{"selected" if request.path == new_contact_path}" %></li>
-			<li><%= link_to "Segments", segments_path, class: "#{"selected" if request.path == segments_path}" %></li>
-			<% @user.segments.each do |segment| %>
-				<li><%= link_to segment.name, segment_contacts_path(segment) %></li>
-			<% end %>
 		</ul>
 	</div>
 </div>

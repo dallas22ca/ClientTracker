@@ -3,7 +3,7 @@
 		<%= hidden_field_tag :description, params[:description] %>
 		<%= hidden_field_tag :start, cookies[:start] %>
 		<%= hidden_field_tag :finish, cookies[:finish] %>
-		<%= select_tag :now_offset, options_for_select([["30 minutes ago", 30.minutes], ["1 hour", 1.hour], ["3 hours ago", 3.hours], ["6 hours ago", 6.hours], ["12 hours ago", 12.hours], ["1 day", 1.day], ["2 days ago", 2.days], ["3 days ago", 3.days]], cookies[:now_offset]) %>
+		<%= select_tag :now_offset, options_for_select([["30 minutes ago", 30.minutes], ["1 hour", 1.hour], ["3 hours ago", 3.hours], ["6 hours ago", 6.hours], ["12 hours ago", 12.hours], ["1 day", 1.day], ["2 days ago", 2.days], ["3 days ago", 3.days], ["1 week ago", 1.week], ["2 weeks", 2.weeks], ["3 weeks ago", 3.weeks], ["1 month ago", 1.month], ["2 months ago", 2.months], ["3 months ago", 3.months]], cookies[:now_offset]) %>
 		until
 		<%= select_tag :muhaha, options_for_select(["Now"]) %>
 		<div style="display: none; ">

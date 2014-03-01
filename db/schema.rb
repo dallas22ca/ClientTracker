@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140204024207) do
+ActiveRecord::Schema.define(version: 20140301022603) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,7 +67,10 @@ ActiveRecord::Schema.define(version: 20140204024207) do
     t.integer  "contact_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "event_id"
   end
+
+  add_index "segmentizations", ["event_id"], name: "index_segmentizations_on_event_id", using: :btree
 
   create_table "segments", force: true do |t|
     t.integer  "user_id"
@@ -76,6 +79,7 @@ ActiveRecord::Schema.define(version: 20140204024207) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "segmentizations_count", default: 0
+    t.string   "model",                 default: "Contact"
   end
 
   add_index "segments", ["user_id"], name: "index_segments_on_user_id", using: :btree

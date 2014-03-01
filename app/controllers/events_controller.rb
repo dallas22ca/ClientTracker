@@ -1,12 +1,15 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   before_action :set_contact
+  before_action :set_segment
   before_action :set_times, only: [:index]
 
   # GET /events
   # GET /events.json
   def index
-    resource = @contact ? @contact : @user
+    resource = @contact if @contact
+    resource = @segment if @segment
+    resource ||= @user
     
     unless params[:description].blank?
       @events = resource.events.includes(:contact).where(description: params[:description], created_at: @start..@finish).order("events.created_at desc").references(:contact).paginate(page: params[:page], per_page: 20)
@@ -32,7 +35,7 @@ class EventsController < ApplicationController
   end
   
   def analysis
-    
+    @event = @user.events.find(params[:event_id])
   end
 
   # POST /events
@@ -62,6 +65,7 @@ class EventsController < ApplicationController
     @user = false
     
     begin
+      p "=========#{Base64.decode64(params[:args])}"
       args = JSON.parse(Base64.decode64(params[:args])).to_hash.with_indifferent_access
       @user = User.where(api_key: args.delete(:remetric_api_key)).first
       key = args[:contact].delete(:key).parameterize
@@ -75,10 +79,10 @@ class EventsController < ApplicationController
     rescue
     end
     
-    if args[:redirect].to_s.blank?
-      send_data(Base64.decode64("R0lGODlhAQABAPAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="), :type => "image/gif", :disposition => "inline")
-    else
+    if args && args[:redirect] && !args[:redirect].to_s.blank?
       redirect_to args[:redirect]
+    else
+      send_data(Base64.decode64("R0lGODlhAQABAPAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="), :type => "image/gif", :disposition => "inline")
     end
   end
 
@@ -100,6 +104,10 @@ class EventsController < ApplicationController
     
     def set_contact
       @contact = @user.contacts.where(key: params[:contact_id]).first if params[:contact_id]
+    end
+    
+    def set_segment
+      @segment = @user.segments.find(params[:segment_id]) if params[:segment_id]
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

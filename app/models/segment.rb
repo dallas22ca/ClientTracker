@@ -4,6 +4,7 @@ class Segment < ActiveRecord::Base
   
   has_many :segmentizations
   has_many :contacts, through: :segmentizations
+  has_many :events, through: :segmentizations
   has_many :messageships
   has_many :messages, through: :messageships
   
@@ -15,29 +16,30 @@ class Segment < ActiveRecord::Base
   
   def sync_segmentizations
     new_segmentizations = []
-    not_in = current_contacts.pluck(:id)
-    
-    no_longer = segmentizations.where("segmentizations.contact_id not in (?)", not_in)
+    not_in = current_resources.pluck(:id)
+  
+    no_longer = segmentizations.where("segmentizations.#{model.downcase}_id not in (?)", not_in)
     no_longer_count = no_longer.count
     no_longer.destroy_all
-    
-    current_segmentizations = segmentizations.pluck(:contact_id)
+  
+    current_segmentizations = segmentizations.pluck("#{model.downcase}_id".to_sym)
     current_segmentizations = [0] if current_segmentizations == []
 
-    current_contacts.where("contacts.id not in (?)", current_segmentizations).find_each do |contact|
-      s = { contact_id: contact.id, segment_id: id }
+    current_resources.where("#{model.pluralize}.id not in (?)", current_segmentizations).find_each do |resource|
+      s = { segment_id: id }
+      s["#{model.downcase}_id".to_sym] = resource.id
       new_segmentizations.push s
     end
-    
+  
     Segmentization.create new_segmentizations
     self.update_columns segmentizations_count: segmentizations.count
   end
   
-  def user_contacts
-    @user_contacts ||= user.contacts
+  def user_resources
+    @user_resources ||= user.send(model.downcase.pluralize)
   end
   
-  def current_contacts
+  def current_resources
     n = 0
     query = ""
   
@@ -46,20 +48,20 @@ class Segment < ActiveRecord::Base
       join = " #{joiner} " if conditions.size != n - 1
     
       if matcher == "exists"
-        query += "contacts.data ? '#{attribute}'#{join}"
+        query += "#{model.downcase.pluralize}.data ? '#{attribute}'#{join}"
       elsif matcher == "does not exist"
-        query += "exist(contacts.data, '#{attribute}') is false#{join}"
+        query += "exist(#{model.downcase.pluralize}.data, '#{attribute}') is false#{join}"
       elsif matcher == "!="
-        query += "(exist(contacts.data, '#{attribute}') is false or contacts.data -> '#{attribute}' #{matcher} '#{search}') #{join}"
+        query += "(exist(#{model.downcase.pluralize}.data, '#{attribute}') is false or #{model.downcase.pluralize}.data -> '#{attribute}' #{matcher} '#{search}') #{join}"
       elsif [">", ">=", "<", "<="].include? matcher
-        query += "(contacts.data -> '#{attribute}')::integer #{matcher} #{search.to_i}#{join}"
+        query += "(#{model.downcase.pluralize}.data -> '#{attribute}')::float #{matcher} #{search.to_i}#{join}"
       else
-        query += "contacts.data -> '#{attribute}' #{matcher} '#{search}'#{join}"
+        query += "#{model.downcase.pluralize}.data -> '#{attribute}' #{matcher} '#{search}'#{join}"
       end
     
       n += 1
     end
   
-    @current_contacts ||= user_contacts.where(query)
+    user_resources.where(query)
   end
 end

@@ -16,8 +16,10 @@
 	
 	<% if [root_path, events_path].include? request.path %>
 		<%= render "time" %>
-	<% elsif /segments|contacts|import/ =~ request.path %>
-		<%= render "contacts/subnav" %>
+	<% elsif /segments/ =~ request.path || @segment %>
+		<%= render "segments/subnav" %>
+	<% else %>
+		<%= render "subnav" %>
 	<% end %>
 	
 	
@@ -42,20 +44,20 @@
     </div>
   </div>
 
-
 <!--
-	
+
 		<script type="text/javascript">
 			this._RM || (this._RM = []);
 			_RM.push(["debug"]);
 			_RM.push(["domain", "http://localhost:3000"]);
 			_RM.push(["api_key", "IPvBEuGI9Znf3245Z0cjIi6yvsIgTpXUizh8qVlmB5n4oO8N"]);
-		  _RM.push(["track", "{{ contact.name }} did something really awesome ({{ last_awesome }}).", {
+		  _RM.push(["track", {
+				description: "{{ contact.name }} did something really awesome ({{ amount }}).",
 		    contact: {
-					key: "dallas",
-					name: "Dallas Read"
+					key: "dallas2",
+					name: "Dallas Read II"
 				},
-				last_awesome: "great"
+				amount: 9.28
 		  }]);
 		
 		  (function() {

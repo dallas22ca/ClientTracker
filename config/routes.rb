@@ -15,6 +15,7 @@ Rem::Application.routes.draw do
   
   resources :segments do
     resources :contacts, only: [:index]
+    resources :events, only: [:index]
   end
   
   resources :contacts do

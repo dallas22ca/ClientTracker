@@ -1,0 +1,13 @@
+<div class="subnav_wrapper">
+	<div class="wide_container">
+		<ul class="subnav">
+			<% @user.segments.each do |segment| %>
+				<% if segment.model == "Contact" %>
+					<li><%= link_to segment.name, segment_contacts_path(segment) %></li>
+				<% elsif segment.model == "Event" %>
+					<li><%= link_to segment.name, segment_events_path(segment) %></li>
+				<% end %>
+			<% end %>
+		</ul>
+	</div>
+</div>

@@ -1,14 +1,19 @@
 <ul id="event_types">
 	<li class="<%= "selected" if params[:description].blank? %>">
 		<div class="percent_bg" style="width: 100%; "></div>
-		<%= link_to "All Events", events_path %>
+		<% if @segment %>
+			<%= link_to "All Events", segment_events_path(@segment) %>
+		<% else %>
+			<%= link_to "All Events", events_path %>
+		<% end %>
 	</li>
 	
 	<% Hash[@all_events.group_by(&:description).sort_by{|k, v| v.count}.reverse.to_a].each do |k, v| %>
 	<% percent = @all_events_count == 0 ? 0 : number_to_human(v.count * 100.0 / @all_events_count, precision: 3, strip_insignificant_zeros: true) + "%" %>
+		<% href = @segment ? segment_events_path(@segment, description: k) : events_path(description: k) %>
 		<li class="<%= "selected" if params[:description] == k %>">
 			<div class="percent_bg" style="width: <%= percent %>; "></div>
-			<%= link_to "<span class=\"name\">#{k}</span> <span class=\"percent\">#{percent}</span>".html_safe, events_path(description: k), title: k %>
+			<%= link_to "<span class=\"name\">#{k}</span> <span class=\"percent\">#{percent}</span>".html_safe, href, title: k %>
 		</li>
 	<% end %>
 </ul>

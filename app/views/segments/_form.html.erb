@@ -12,6 +12,11 @@
   <% end %>
 
   <div class="field">
+    <%= f.label :model, "What does this segment?" %><br>
+    <%= f.select :model, options_for_select(["Contact", "Event"], f.object.try(:model)) %>
+  </div>
+  
+	<div class="field">
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>

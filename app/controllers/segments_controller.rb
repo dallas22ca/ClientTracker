@@ -15,7 +15,7 @@ class SegmentsController < ApplicationController
 
   # GET /segments/new
   def new
-    @segment = Segment.new()
+    @segment = Segment.new(conditions: [["", "", ""]])
   end
 
   # GET /segments/1/edit
@@ -70,13 +70,15 @@ class SegmentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def segment_params
-      params.require(:segment).permit(:name).tap do |whitelisted|
+      params.require(:segment).permit(:name, :model).tap do |whitelisted|
         conditions = []
         
-        params[:field].each_with_index do |field, index|
-          condition = [params[:field][index], params[:matcher][index], params[:search][index]]
-          condition.push "and" if params[:field].size != index + 1
-          conditions.push condition
+        if params[:field]
+          params[:field].each_with_index do |field, index|
+            condition = [params[:field][index], params[:matcher][index], params[:search][index]]
+            condition.push "and" if params[:field].size != index + 1
+            conditions.push condition
+          end
         end
         
         whitelisted[:conditions] = conditions

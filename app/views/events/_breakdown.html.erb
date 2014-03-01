@@ -1,5 +1,3 @@
-<h4>Lively Chat Support</h4>
-<p class="tag">initiated-by</p>
-<div class="graph">
-	<p class="graph_loading">The graph is loading...</p>
-</div>
+<pre><%= JSON.pretty_generate @event.data.merge({ 
+	contact: @event.contact_snapshot 
+}) %></pre>

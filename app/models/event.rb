@@ -2,6 +2,7 @@ class Event < ActiveRecord::Base
   store_accessor :data
   belongs_to :contact
   belongs_to :user
+  belongs_to :segment
   
   before_create :merge_contact_data
   
