@@ -4,9 +4,16 @@
 
 <% else %>
 
+	<div class="graphs">
+		<%= render @user.graphs %>
+		<%= render @user.graphs %>
+		<%= render @user.graphs %>
+		<div class="clear"></div>
+	</div>
+
 	<%= render "latest_events" %>
 	<%= render "epm" %>
-
+	
 	<div class="clear"></div>
 
 <% end %>

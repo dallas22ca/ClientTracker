@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   has_many :events
   has_many :segments
   has_many :messages
+  has_many :graphs
   
   has_attached_file :file,
                     :path  => Rails.env.development? || Rails.env.test? ? "#{Rails.root}/uploads/:user_id/:hash.:extension" : "/home/deployer/apps/clienttracker/shared/uploads/:user_id/:hash.:extension",

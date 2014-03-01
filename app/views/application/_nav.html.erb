@@ -10,6 +10,7 @@
 				<li><%= link_to "Events", events_path, class: "#{"selected" if request.path == events_path}" %></li>
 				<li><%= link_to "Contacts", contacts_path, class: "#{"selected" if request.path == contacts_path}" %></li>
 				<li><%= link_to "Segments", segments_path, class: "#{"selected" if request.path == segments_path}" %></li>
+				<li><%= link_to "Graphs", graphs_path, class: "#{"selected" if request.path == graphs_path}" %></li>
 			
 				<% if current_user.allowed_to_email? %>
 					<li><%= link_to "New Message", new_message_path, class: "#{"selected" if request.path == new_message_path}" %></li>

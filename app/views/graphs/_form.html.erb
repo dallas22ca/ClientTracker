@@ -1,0 +1,37 @@
+<%= form_for(@graph) do |f| %>
+  <% if @graph.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@graph.errors.count, "error") %> prohibited this graph from being saved:</h2>
+
+      <ul>
+      <% @graph.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :style %><br>
+    <%= f.select :style, options_for_select([["Percent", "percent"]]) %>
+  </div>
+	<% if current_user.segments.for_events.any? %>
+	  <div class="field">
+	    <%= label_tag :numerator %><br>
+	    <%= select_tag :numerator, options_for_select([["All Events", 0]] + current_user.segments.for_events.map { |s| [s.name, s.id] }, f.object.data["numerator"]), name: "graph[data][numerator]" %>
+	  </div>
+	  <div class="field">
+	    <%= label_tag :denominator %><br>
+	    <%= select_tag :denominator, options_for_select([["All Events", 0]] + current_user.segments.for_events.map { |s| [s.name, s.id] }, f.object.data["denominator"]), name: "graph[data][denominator]" %>
+	  </div>
+	  <div class="actions">
+	    <%= f.submit %>
+	  </div>
+	<% else %>
+		Before you can create a graph, you'll need to add an Segment for Events.
+	<% end %>
+<% end %>

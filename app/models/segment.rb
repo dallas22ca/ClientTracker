@@ -10,6 +10,9 @@ class Segment < ActiveRecord::Base
   
   after_save :sidekiq_sync_segmentizations
   
+  scope :for_events, -> { where model: "Event" }
+  scope :for_contacts, -> { where model: "Contact" }
+  
   def sidekiq_sync_segmentizations
     Segmentizer.perform_async id
   end
@@ -35,11 +38,11 @@ class Segment < ActiveRecord::Base
     self.update_columns segmentizations_count: segmentizations.count
   end
   
-  def user_resources
-    @user_resources ||= user.send(model.downcase.pluralize)
+  def resources
+    @resources ||= user.send(model.downcase.pluralize)
   end
   
-  def current_resources
+  def current_resources(output = nil, start = nil, finish = nil)
     n = 0
     query = ""
   
@@ -61,7 +64,19 @@ class Segment < ActiveRecord::Base
     
       n += 1
     end
-  
-    user_resources.where(query)
+    
+    if start && finish
+      if output == "count"
+        resources.where(query).where(created_at: start..finish).count
+      else
+        resources.where(query).where(created_at: start..finish)
+      end
+    else
+      if output == "count"
+        resources.where(query).count
+      else
+        resources.where(query)
+      end
+    end
   end
 end

@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @graph.title %>
+</p>
+
+<p>
+  <strong>Style:</strong>
+  <%= @graph.style %>
+</p>
+
+<p>
+  <strong>Data:</strong>
+  <%= @graph.data %>
+</p>
+
+<%= link_to 'Edit', edit_graph_path(@graph) %> |
+<%= link_to 'Back', graphs_path %>

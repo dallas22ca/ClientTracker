@@ -2,6 +2,8 @@ require "sidekiq/web"
 
 Rem::Application.routes.draw do
   
+  resources :graphs
+
   devise_for :users
   
   get "/events/img/:args" => "events#img", as: :event_img, format: :gif
