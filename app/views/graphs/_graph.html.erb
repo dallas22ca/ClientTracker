@@ -1,5 +1,5 @@
 <%= content_tag_for :div, graph, class: "#{graph.style}_graph" do %>
-	<h2 class="rate"><%= graph.rate(@start, @finish) %></h2>
+	<h2 class="rate"><%= graph.rate(@start, @finish) %> %</h2>
 	<h3 class="title"><%= graph.title %></h3>
 	<p class="description"><%= graph.numerator(@start, @finish) %> / <%= graph.denominator(@start, @finish) %> events</p>
 <% end %>
