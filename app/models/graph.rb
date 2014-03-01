@@ -16,6 +16,9 @@ class Graph < ActiveRecord::Base
   end
   
   def rate(start, finish)
-    '%.1f' % (numerator(start, finish) * 100.00 / denominator(start, finish)).round(1)
+    @rate ||= (
+      r = numerator(start, finish) * 100.00 / denominator(start, finish)
+      r.nan? ? "0" : '%.1f' % (r).round(1)
+    )
   end
 end
