@@ -19,8 +19,6 @@ class User < ActiveRecord::Base
     file.instance.id
   end
   
-  validates_inclusion_of :time_zone, in: ActiveSupport::TimeZone.zones_map(&:name)
-  
   before_create :generate_api_key
   after_commit :sidekiq_parse_contacts, if: Proc.new { file.exists? }
   
