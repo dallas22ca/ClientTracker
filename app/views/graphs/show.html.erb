@@ -15,5 +15,10 @@
   <%= @graph.data %>
 </p>
 
+<div class="graphs">
+	<%= render @graph %>
+	<div class="clear"></div>
+</div>
+
 <%= link_to 'Edit', edit_graph_path(@graph) %> |
 <%= link_to 'Back', graphs_path %>
