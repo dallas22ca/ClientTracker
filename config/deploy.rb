@@ -11,6 +11,8 @@ set :deploy_to, "/home/#{user}/apps/#{application}"
 set :deploy_via, :remote_cache
 set :use_sudo, false
 set :workers, { '*' => 3 }
+set :stages, %w(production)
+set :default_stage, "staging"
 
 set :scm, "git"
 set :repository, "git@github.com:dallas22ca/#{application}.git"
