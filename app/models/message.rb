@@ -5,8 +5,14 @@ class Message < ActiveRecord::Base
   has_many :segments, through: :messageships
   has_many :sendable_contacts, through: :segments, source: :contacts
   
+  validate :has_segments?
+
   after_commit :calculate_contacts_count
   after_commit :sidekiq_prepare_for_delivery, unless: :sent
+  
+  def has_segments?
+    errors.add :base, "Please choose at least one segment!" if self.segments.blank?
+  end
   
   def sidekiq_prepare_for_delivery
     BulkSender.perform_async "prepare_for_delivery", id
@@ -20,8 +26,8 @@ class Message < ActiveRecord::Base
     unless sent?
       mark_as_sent
 
-      for contact in sendable_contacts.where("contacts.data ? 'email'")
-        BulkSender.perform_async "deliver", id, contact.id
+      for contact_id in sendable_contacts.subscribed.has_email.pluck(:contact_id).uniq
+        BulkSender.perform_async "deliver", id, contact_id
       end
     end
   end

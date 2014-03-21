@@ -1,0 +1,7 @@
+<% if !@contact %>
+	We cannot find your profile.
+<% elsif @contact.subscribed %>
+	You have re-subscribed to receive emails.
+<% else %>
+	You have been unsubscribed from all future mailings.
+<% end %>

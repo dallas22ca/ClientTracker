@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140301134260) do
+ActiveRecord::Schema.define(version: 20140307111414) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20140301134260) do
     t.hstore   "data",       default: {}
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "subscribed", default: true
   end
 
   add_index "contacts", ["user_id"], name: "index_contacts_on_user_id", using: :btree
@@ -114,6 +115,7 @@ ActiveRecord::Schema.define(version: 20140301134260) do
     t.integer  "events_count",           default: 0
     t.integer  "contacts_count",         default: 0
     t.string   "time_zone",              default: "Atlantic Time (Canada)"
+    t.string   "name"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

@@ -14,6 +14,9 @@ class Contact < ActiveRecord::Base
   after_commit :sync_segmentizations
   after_destroy :sync_segmentizations
   
+  scope :has_email, -> { where("contacts.data ? 'email'") }
+  scope :subscribed, -> { where(subscribed: true) }
+  
   def parameterize_data
     self.data ||= {}; d = {}; 
     self.data.map { |k, v| d[k.to_s.parameterize] = v }

@@ -2,8 +2,6 @@ require "sidekiq/web"
 
 Rem::Application.routes.draw do
   
-  resources :graphs
-
   devise_for :users
   
   get "/events/img/:args" => "events#img", as: :event_img, format: :gif
@@ -14,6 +12,7 @@ Rem::Application.routes.draw do
   post "/contacts/save" => "contacts#save", as: :save_contact
   post "/contacts/overwrite" => "contacts#overwrite", as: :overwrite_contact
   get "/contacts/overview" => "overview#contacts", as: :contacts_overview
+  get "/subscriptions/:token" => "subscriptions#index", as: :subscribe
   
   resources :segments do
     resources :contacts, only: [:index]
@@ -24,6 +23,7 @@ Rem::Application.routes.draw do
     resources :events, only: [:index, :show]
   end
   
+  resources :graphs
   resources :messages
   resources :events, only: [:index, :create]
   

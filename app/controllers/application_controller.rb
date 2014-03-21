@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   skip_before_filter :verify_authenticity_token, if: :api_hit?
   before_filter :authenticate_user_from_api_key!, if: :api_hit?
   before_filter :authenticate_user!, unless: :img_hit?
+  before_filter :configure_permitted_parameters, if: :devise_controller?
   before_filter :set_user
   before_filter :set_time_zone
   before_filter :set_time_cookies
@@ -43,5 +44,11 @@ class ApplicationController < ActionController::Base
     else
       false
     end
+  end
+  
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:remember_me, :email, :password, :password_confirmation) }
+    devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:remember_me, :email, :password, :password_confirmation) }
+    devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:name, :time_zone, :email, :password, :password_confirmation, :current_password) }
   end
 end

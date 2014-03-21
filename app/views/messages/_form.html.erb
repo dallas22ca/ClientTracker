@@ -27,7 +27,7 @@
   </div>
 	
 	<div class="field">
-		<% @user.segments.each do |segment| %>
+		<% @user.segments.for_contacts.each do |segment| %>
 	    <%= check_box_tag "message[segment_ids][]", segment.id, @message.segment_ids.include?(segment.id), id: dom_id(segment) %>&nbsp;
 	    <%= label_tag dom_id(segment), "#{segment.name} (#{segment.segmentizations_count} recipients)" %><br>
 		<% end %>

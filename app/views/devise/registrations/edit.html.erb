@@ -10,6 +10,9 @@
   <div><%= f.label :email %><br />
   <%= f.email_field :email, :autofocus => true %></div>
 	
+  <div><%= f.label :name %><br />
+  <%= f.text_field :name %></div>
+	
 	<div><%= f.label :time_zone %><br />
 	<%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones %></div>
 
