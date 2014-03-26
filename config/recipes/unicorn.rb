@@ -25,6 +25,7 @@ namespace :unicorn do
   
   task :restart, roles: :app do
     stop
+    sleep 5
     start
   end
   

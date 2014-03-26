@@ -8,7 +8,7 @@ class Segment < ActiveRecord::Base
   has_many :messageships
   has_many :messages, through: :messageships
   
-  after_save :sidekiq_sync_segmentizations
+  after_commit :sidekiq_sync_segmentizations
   
   scope :for_events, -> { where model: "Event" }
   scope :for_contacts, -> { where model: "Contact" }

@@ -10,7 +10,7 @@ class MessageMailer < ActionMailer::Base
     user = message.user
     details = { "contact" => contact.data }
     
-    token = Base64.encode64 encryptor.encrypt_and_sign("#{user.id};#{contact.id}")
+    token = Base64.encode64 encryptor.encrypt_and_sign("#{user.id};#{contact_id}")
     @subscribe = subscribe_url(token)
     
     body = Liquid::Template.parse(message.body)
