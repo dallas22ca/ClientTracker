@@ -1,5 +1,11 @@
 <%= content_tag_for :div, graph, class: "#{graph.style}_graph" do %>
-	<h2 class="rate"><%= graph.rate(@start, @finish) %> %</h2>
-	<h3 class="title"><%= graph.title %></h3>
-	<p class="description"><%= graph.numerator(@start, @finish) %> / <%= graph.denominator(@start, @finish) %> events</p>
+	<% if graph.style == "percent" %>
+		<h2 class="rate"><%= graph.rate(@start, @finish) %> %</h2>
+		<h3 class="title"><%= graph.title %></h3>
+		<p class="description"><%= graph.numerator(@start, @finish) %> / <%= graph.denominator(@start, @finish) %> events</p>
+	<% elsif graph.style == "number" %>
+		<h2 class="rate"><%= graph.numerator(@start, @finish) %> %</h2>
+		<h3 class="title"><%= graph.title %></h3>
+		<p class="description">&nbsp;</p>
+	<% end %>
 <% end %>

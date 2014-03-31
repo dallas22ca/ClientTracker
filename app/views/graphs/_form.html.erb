@@ -17,16 +17,17 @@
   </div>
   <div class="field">
     <%= f.label :style %><br>
-    <%= f.select :style, options_for_select([["Percent", "percent"]]) %>
+    <%= f.select :style, options_for_select([["Number", "number"], ["Percent", "percent"]], f.object.try(:style)) %>
   </div>
+
 	<% if current_user.segments.for_events.any? %>
 	  <div class="field">
 	    <%= label_tag :numerator %><br>
-	    <%= select_tag :numerator, options_for_select([["All Events", 0]] + current_user.segments.for_events.map { |s| [s.name, s.id] }, f.object.data["numerator"]), name: "graph[data][numerator]" %>
+	    <%= select_tag :numerator, options_for_select([["All Events", 0], [1, 1]] + current_user.segments.for_events.map { |s| [s.name, s.id] }, f.object.data["numerator"]), name: "graph[data][numerator]" %>
 	  </div>
 	  <div class="field">
 	    <%= label_tag :denominator %><br>
-	    <%= select_tag :denominator, options_for_select([["All Events", 0]] + current_user.segments.for_events.map { |s| [s.name, s.id] }, f.object.data["denominator"]), name: "graph[data][denominator]" %>
+	    <%= select_tag :denominator, options_for_select([["All Events", 0], [1, 1]] + current_user.segments.for_events.map { |s| [s.name, s.id] }, f.object.data["denominator"]), name: "graph[data][denominator]" %>
 	  </div>
 	  <div class="actions">
 	    <%= f.submit %>

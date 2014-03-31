@@ -3,15 +3,23 @@ class Graph < ActiveRecord::Base
   
   def numerator(start, finish)
     @numerator ||= (
-      segment = user.segments.where(id: data["numerator"]).first
-      segment ? segment.current_resources("count", start, finish) : user.events.where(created_at: start..finish).count
+      if data["numerator"].to_i == 1
+        1
+      else
+        segment = user.segments.where(id: data["numerator"]).first
+        segment ? segment.current_resources("count", start, finish) : user.events.where(created_at: start..finish).count
+      end
     )
   end
   
   def denominator(start, finish)
     @denominator ||= (
-      segment = user.segments.where(id: data["denominator"]).first
-      segment ? segment.current_resources("count", start, finish) : user.events.where(created_at: start..finish).count
+      if data["denominator"].to_i == 1
+        1
+      else
+        segment = user.segments.where(id: data["denominator"]).first
+        segment ? segment.current_resources("count", start, finish) : user.events.where(created_at: start..finish).count
+      end
     )
   end
   
