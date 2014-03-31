@@ -6,7 +6,7 @@
 	.graph {
 		padding: 15px;
 		
-		&.percent_graph {
+		&.percent_graph, &.number_graph {
 			text-align: center;
 			float: left;
 			width: 33.3333%;
