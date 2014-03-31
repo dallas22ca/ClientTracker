@@ -3,12 +3,20 @@ set_default(:sidekiq_config) { "#{current_path}/config/sidekiq.yml" }
 set_default(:sidekiq_log) { "#{shared_path}/log/sidekiq.log" }
 
 namespace :sidekiq do
-  %w[restart start stop].each do |op|
-    desc "#{op} sidekiq"
-    task op.to_sym, :roles => :app do
-      run "#{sudo} monit #{op} sidekiq"
-    end
-  end
+  # task :stop, :roles => :app do
+  #   run "#{sudo} monit stop sidekiq"
+  # end
+  # 
+  # task :start, :roles => :app do
+  #   run "#{sudo} monit start sidekiq"
+  # end
+  # 
+  # task :restart, :roles => :app do
+  #   stop
+  #   sleep 5
+  #   start
+  # end
+  after "unicorn:start", "sidekiq:restart"
   
   desc "Setup Sidekiq initializer and app configuration"
   task :setup, roles: :app do
